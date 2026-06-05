@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "csgeeker" },
+      { name: "description", content: "Curiosity Hub Hangzhou is a community website for curious and creative individuals in Hangzhou." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "csgeeker" },
+      { property: "og:description", content: "Curiosity Hub Hangzhou is a community website for curious and creative individuals in Hangzhou." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "csgeeker" },
+      { name: "twitter:description", content: "Curiosity Hub Hangzhou is a community website for curious and creative individuals in Hangzhou." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/19be9eef-500c-46cd-a31e-9c8fd2acaa8f/id-preview-d2f18746--e4ab6ce1-f338-46f6-a43b-a5dfb1c3c9b7.lovable.app-1780680966404.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/19be9eef-500c-46cd-a31e-9c8fd2acaa8f/id-preview-d2f18746--e4ab6ce1-f338-46f6-a43b-a5dfb1c3c9b7.lovable.app-1780680966404.png" },
     ],
     links: [
       {
