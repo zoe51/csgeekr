@@ -168,11 +168,6 @@
     font-family: var(--font-serif);
     font-style: italic;
   }
-  .font-cn {
-    font-family: var(--font-cn-display);
-    font-weight: 400;
-    letter-spacing: 0.02em;
-  }
 
   .grain::before {
     content: "";
