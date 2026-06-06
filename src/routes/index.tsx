@@ -247,7 +247,7 @@ function SectionWhat() {
           </Reveal>
           <Reveal delay={0.15} className="space-y-6 self-end text-lg leading-relaxed md:col-span-5 md:text-xl">
             <p>这个时代，信息从不稀缺。稀缺的，是好问题。</p>
-            <p>我们相信：一个好问题，比一百个答案更有力量。所以我们想邀请你，一起来探讨这个时代真正值得被看见、被思考、被解决的问题。</p>
+            <p>我们相信：一个好问题，比一百个答案更有力量。我们想要邀请习惯性深度思考和提问的创造者们，一起来创客厅探讨，这个时代真正值得被看见、被思考、被解决的问题。</p>
             <p className="font-display font-medium text-2xl" style={{ color: "var(--brand)" }}>
               Driven by questions, not tasks.
             </p>
@@ -336,7 +336,7 @@ function SectionWho() {
               不知道你最近，有没有被什么问题抓住？
             </p>
             <p className="mt-6 text-base leading-relaxed text-[var(--ink)]/75">
-              提出问题只是开始，远不止终点。我们想要邀请对相似问题感兴趣的伙伴来到创客厅彼此认识、相互了解。也许你们可以因为共同关心某个问题而彼此看见，甚至因为一起整理线索而开始协作。
+              提出问题只是开始。我们想邀请对相似问题感兴趣的伙伴来到创客厅，彼此认识，相互看见——也许你们会因共同关心某个问题而彼此看见，甚至展开协作。也许甚至，我们可以因此构建一个以真实表达和共同信念为根基的信任网络。
             </p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -346,9 +346,9 @@ function SectionWho() {
               className="mt-10 relative inline-block font-display text-2xl md:text-3xl leading-snug"
             >
               <span className="relative z-10 px-3 py-1" style={{ background: "var(--brand)", color: "var(--paper)" }}>
-              我们期待, 一个好问题，
+              也许一段好关系，
                 <br />
-                可以成为一段好关系的媒介。
+                就从一个好问题开始。
               </span>
             </motion.p>
           </Reveal>
@@ -393,7 +393,7 @@ function SectionAmenities() {
         <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--paper)]/70">
           <span className="font-display font-bold text-[var(--paper)]">04</span>
           <span className="h-px flex-1 max-w-12 bg-[var(--paper)]/40" />
-          创客厅基础设施
+          一个真实存在的根据地
         </div>
         <AnimatedAmenitiesTitle />
 
@@ -467,7 +467,7 @@ function SectionCatalog() {
   return (
     <section ref={ref} id="catalog" className="px-6 py-32 md:px-10 md:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal><SectionLabel n="05">来创客厅，共同创造新时代</SectionLabel></Reveal>
+        <Reveal><SectionLabel n="05">我们一起可以做些什么</SectionLabel></Reveal>
         <Reveal delay={0.1}>
           <h2 className="mt-10 font-display text-4xl leading-[1.02] md:text-[7rem]">
             <span className="font-light">一起</span><span className="font-bold">筹备</span><br />
@@ -495,16 +495,16 @@ function SectionCatalog() {
           </Reveal>
           <Reveal delay={0.15} className="space-y-6 text-base leading-relaxed md:col-span-7 md:text-lg">
             <p>
-              我们钦赞"<span className="font-display">全球概览</span>"的精神，它是由布兰德于 1968 年创办的杂志，是最早将科技视为改变人类生活方式、提升人类创造能力的革命性工具的媒体。
+              1968 年，Stewart Brand 创办《全球概览》——那是最早将科技视为改变人类生活方式、提升人类创造力的革命性工具的媒体。它不止是百科全书，更是一种面向世界的好奇心，一种"人可以借助工具、知识、网络和彼此，把生活重新组织起来"的开放感。
             </p>
+            
             <p>
-              它不止是百科全书，更是展示了一种面向世界的好奇心，一种"人可以借助工具、知识、网络和彼此，把生活重新组织起来"的开放感。这与我们想要打造的、问题驱动的社区精神一脉相承。
-            </p>
-            <p>
-              因此，我们也想要借助这次机会，将大家的提问和洞见，打造成独属于这个时代的"全球概览"。把好问题、好思路、好方案都收录起来，成为贡献给这个时代的开源资产。
+              我们想传承这种精神。将大家提出的好问题、好思路、好方案汇聚起来，打造成贡献给这个时代的开源资产——一张活的问题地图：记录此地此刻的人们，正在如何重新理解工具、地方、生活、知识、协作和未来。
             </p>
             <blockquote className="border-l-2 pl-6 font-display text-2xl leading-snug" style={{ borderColor: "var(--brand)" }}>
-              也许我们可以一起，为这个世界贡献一张活的问题地图：记录此地此刻的人们，正在如何重新理解工具、地方、生活、知识、协作与未来。
+            如果你的心里也一直有放不下的议题，欢迎来创客厅和我们一起探讨。
+            <br />
+            也许在这里，你会遇见和你志趣相投的创业同行者。
             </blockquote>
           </Reveal>
         </div>
