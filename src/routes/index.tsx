@@ -296,8 +296,11 @@ function SectionDetails() {
 }
 
 function SectionWho() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const titleX = useTransform(scrollYProgress, [0, 1], [-60, 60]);
   return (
-    <section className="px-6 py-32 md:px-10 md:py-44">
+    <section ref={ref} className="px-6 py-32 md:px-10 md:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
         <Reveal><SectionLabel n="03">我们是谁</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12 md:items-end">
@@ -321,7 +324,7 @@ function SectionWho() {
             </motion.p>
           </Reveal>
           <Reveal className="md:col-span-12 md:row-start-1 order-1">
-            <h2 className="font-display text-5xl leading-[0.98] md:text-[10rem]">
+            <motion.h2 style={{ x: titleX }} className="font-display text-5xl leading-[0.98] md:text-[10rem]">
               <span className="font-light">来</span><span className="font-bold">线下</span>
               <span className="font-serif-italic italic font-normal text-[var(--brand)]">，</span>
               <br />
@@ -330,7 +333,7 @@ function SectionWho() {
                 同类
               </span>
               <span className="font-serif-italic italic font-normal">.</span>
-            </h2>
+            </motion.h2>
           </Reveal>
         </div>
       </div>
