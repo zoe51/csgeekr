@@ -98,7 +98,7 @@ function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="font-cn text-[var(--paper)] leading-[0.95] text-[clamp(2.75rem,9vw,11rem)]"
+              className="font-display text-[var(--paper)] leading-[0.95] text-[clamp(2.75rem,9vw,11rem)]"
             >
               全世界的<br />
               <span
@@ -194,7 +194,7 @@ function SectionWhat() {
         <Reveal><SectionLabel n="01">我们在做什么</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12">
           <Reveal className="md:col-span-7">
-            <h2 className="font-cn text-5xl leading-[1.05] md:text-[6.5rem]">
+            <h2 className="font-display text-5xl leading-[1.05] md:text-[6.5rem]">
               好的提问，<br />
               比答案<span className="inline-block px-2 md:px-3 ml-2" style={{ background: "var(--brand)", color: "var(--paper)" }}>更重要</span>
             </h2>
@@ -238,7 +238,7 @@ function SectionDetails() {
         <div className="px-6 py-20 md:px-14 md:py-28">
           <Reveal><SectionLabel n="02">什么样的问题值得被找</SectionLabel></Reveal>
           <Reveal delay={0.1}>
-            <h2 className="mt-8 font-cn text-5xl leading-[1.05] md:text-7xl">
+            <h2 className="mt-8 font-display text-5xl leading-[1.05] md:text-7xl">
               伟大<br />
               <span className="inline-block px-2 md:px-3 my-1" style={{ background: "var(--brand)", color: "var(--paper)" }}>
                 往往藏于
@@ -294,7 +294,7 @@ function SectionWho() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="mt-10 relative inline-block font-cn text-2xl md:text-3xl leading-snug"
+              className="mt-10 relative inline-block font-display text-2xl md:text-3xl leading-snug"
             >
               <span className="relative z-10 px-3 py-1" style={{ background: "var(--brand)", color: "var(--paper)" }}>
                 我们期待，一个好问题，可以成为一段好关系的媒介。
@@ -302,7 +302,7 @@ function SectionWho() {
             </motion.p>
           </Reveal>
           <Reveal className="md:col-span-12 md:row-start-1 order-1">
-            <h2 className="font-cn text-5xl leading-[1.05] md:text-[10rem]">
+            <h2 className="font-display text-5xl leading-[1.05] md:text-[10rem]">
               来线下，<br />
               遇见
               <span className="inline-block px-3 md:px-5 ml-2" style={{ background: "var(--brand)", color: "var(--paper)" }}>
@@ -411,7 +411,7 @@ function SectionCatalog() {
       <div className="mx-auto max-w-[1400px]">
         <Reveal><SectionLabel n="05">这里的社区在做什么</SectionLabel></Reveal>
         <Reveal delay={0.1}>
-          <h2 className="mt-10 font-cn text-5xl leading-[1.05] md:text-[7rem]">
+          <h2 className="mt-10 font-display text-5xl leading-[1.05] md:text-[7rem]">
             一起筹备<br />
             新时代的<br />
             <span className="inline-block px-3" style={{ background: "var(--brand)", color: "var(--paper)" }}>
@@ -440,7 +440,7 @@ function SectionCatalog() {
           </Reveal>
           <Reveal delay={0.15} className="space-y-6 text-base leading-relaxed md:col-span-7 md:text-lg">
             <p>
-              我们钦赞"<span className="font-cn">全球概览</span>"的精神，它是由布兰德于 1968 年创办的杂志，是最早将科技视为改变人类生活方式、提升人类创造能力的革命性工具的媒体。
+              我们钦赞"<span className="font-display">全球概览</span>"的精神，它是由布兰德于 1968 年创办的杂志，是最早将科技视为改变人类生活方式、提升人类创造能力的革命性工具的媒体。
             </p>
             <p>
               它不止是百科全书，更是展示了一种面向世界的好奇心，一种"人可以借助工具、知识、网络和彼此，把生活重新组织起来"的开放感。这与我们想要打造的、问题驱动的社区精神一脉相承。
@@ -448,7 +448,7 @@ function SectionCatalog() {
             <p>
               因此，我们也想要借助这次机会，将大家的提问和洞见，打造成独属于这个时代的"全球概览"。把好问题、好思路、好方案都收录起来，成为贡献给这个时代的开源资产。
             </p>
-            <blockquote className="border-l-2 pl-6 font-cn text-2xl leading-snug" style={{ borderColor: "var(--brand)" }}>
+            <blockquote className="border-l-2 pl-6 font-display text-2xl leading-snug" style={{ borderColor: "var(--brand)" }}>
               它将成为一张活的问题地图：记录此地此刻的人们，正在如何重新理解工具、地方、生活、知识、协作与未来。
             </blockquote>
           </Reveal>
@@ -461,7 +461,7 @@ function SectionCatalog() {
 function AnimatedAmenitiesTitle() {
   const chars = ["创", "客", "厅", "有", "什", "么"];
   return (
-    <h2 className="mt-10 font-cn text-5xl leading-[1.05] md:text-[8rem] flex flex-wrap">
+    <h2 className="mt-10 font-display text-5xl leading-[1.05] md:text-[8rem] flex flex-wrap">
       {chars.map((c, i) => (
         <motion.span
           key={i}
@@ -484,7 +484,7 @@ function FooterCTA() {
     <footer id="visit" className="relative px-6 py-24 md:px-10 md:py-32" style={{ background: "var(--ink)", color: "var(--paper)" }}>
       <div className="mx-auto max-w-[1600px]">
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--paper)]/60">直达创客厅 · DROP BY</p>
-        <h2 className="mt-8 font-cn leading-[0.95] text-[clamp(3rem,12vw,15rem)]">
+        <h2 className="mt-8 font-display leading-[0.95] text-[clamp(3rem,12vw,15rem)]">
           全世界的<br />
           <span className="inline-block px-3 md:px-5" style={{ background: "var(--brand)", color: "var(--paper)" }}>提问者</span><br />
           联合起来。
