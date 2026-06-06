@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState, type ReactNode } from "react";
+import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import heroImg from "@/assets/hero.jpg";
 import questionsImg from "@/assets/questions.jpg";
 import spaceImg from "@/assets/space.jpg";
@@ -21,6 +21,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <ScrollProgress />
       <Nav />
       <Hero />
       <SectionWhat />
@@ -30,6 +31,17 @@ function Index() {
       <SectionCatalog />
       <FooterCTA />
     </div>
+  );
+}
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.2 });
+  return (
+    <motion.div
+      style={{ scaleX, transformOrigin: "0% 50%", background: "var(--brand)" }}
+      className="fixed left-0 right-0 top-0 z-[60] h-[3px]"
+    />
   );
 }
 
