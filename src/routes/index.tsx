@@ -110,16 +110,18 @@ function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-[var(--paper)] leading-[0.95] text-[clamp(2.75rem,9vw,11rem)]"
+              className="font-display text-[var(--paper)] leading-[0.92] text-[clamp(2.75rem,9vw,11rem)]"
             >
-              全世界的<br />
+              <span className="font-light">全世界的</span>
+              <span className="font-serif-italic font-normal italic text-[var(--paper)]/80"> all </span>
+              <br />
               <span
-                className="inline-block px-3 md:px-5 align-baseline text-[var(--paper)]"
+                className="inline-block px-3 md:px-5 font-bold align-baseline text-[var(--paper)]"
                 style={{ background: "var(--brand)" }}
               >
                 提问者
               </span>
-              联合起来
+              <span className="font-light">联合</span><span className="font-bold">起来</span>
             </motion.h1>
             <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <motion.p
