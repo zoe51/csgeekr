@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { ArrowUpRight, Check, Copy } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import questionsImg from "@/assets/questions.jpg";
 import spaceImg from "@/assets/space.jpg";
@@ -505,6 +506,26 @@ function AnimatedAmenitiesTitle() {
 }
 
 function FooterCTA() {
+  const fullAddress = "杭州市拱墅区科祥街139号 汇金云创南门 6B-5楼";
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(fullAddress);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = fullAddress;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <footer id="visit" className="relative px-6 py-24 md:px-10 md:py-32" style={{ background: "var(--ink)", color: "var(--paper)" }}>
       <div className="mx-auto max-w-[1600px]">
@@ -519,9 +540,31 @@ function FooterCTA() {
         <div className="mt-16 grid gap-10 border-t border-[var(--paper)]/20 pt-10 md:grid-cols-3">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--paper)]/50">ADDRESS</p>
-            <p className="mt-3 font-display text-lg">
-              杭州市拱墅区科祥街139号<br />
-              汇金云创南门 6B-5楼
+            <div className="mt-3 flex flex-wrap items-start gap-4">
+              <p className="font-display text-lg leading-snug">
+                杭州市拱墅区科祥街139号<br />
+                汇金云创南门 6B-5楼
+              </p>
+              <button
+                type="button"
+                onClick={handleCopy}
+                aria-label="复制地址全称"
+                className="group/copy inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-[var(--paper)]/25 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.22em] text-[var(--paper)]/75 transition-all duration-300 hover:border-[var(--brand)] hover:text-[var(--brand)]"
+              >
+                <span
+                  className="flex h-4 w-4 items-center justify-center transition-transform duration-300 group-hover/copy:rotate-[-8deg]"
+                  style={{ color: copied ? "var(--brand)" : "currentColor" }}
+                >
+                  {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                </span>
+                {copied ? "已复制" : "复制地址"}
+              </button>
+            </div>
+            <p
+              className="mt-3 font-mono text-[11px] tracking-wider text-[var(--paper)]/40 transition-opacity duration-300"
+              style={{ opacity: copied ? 1 : 0.6 }}
+            >
+              {fullAddress}
             </p>
           </div>
           <div>
@@ -534,18 +577,45 @@ function FooterCTA() {
           <div className="flex md:justify-end">
             <a
               href="#"
-              className="group inline-flex items-center gap-3 self-start rounded-full px-7 py-4 font-display text-sm font-medium text-[var(--ink)] transition hover:opacity-90"
-              style={{ background: "var(--paper)" }}
+              className="group relative inline-flex flex-col items-start gap-3 self-start"
             >
-              导航至创客厅
-              <span className="transition group-hover:translate-x-1" aria-hidden>→</span>
+              <span
+                aria-hidden
+                className="absolute -left-3 -top-3 h-5 w-5 border-l-2 border-t-2 transition-all duration-500 group-hover:-left-4 group-hover:-top-4"
+                style={{ borderColor: "var(--brand)" }}
+              />
+              <span
+                aria-hidden
+                className="absolute -right-3 -bottom-3 h-5 w-5 border-r-2 border-b-2 transition-all duration-500 group-hover:-right-4 group-hover:-bottom-4"
+                style={{ borderColor: "var(--brand)" }}
+              />
+              <span className="flex items-center gap-3 text-[10px] uppercase tracking-[0.32em] text-[var(--paper)]/65">
+                <span className="h-px w-7 bg-[var(--brand)]" />
+                Navigate
+              </span>
+              <span
+                className="relative inline-flex items-center gap-4 overflow-hidden rounded-full px-7 py-4 font-display text-base font-medium tracking-wide transition-all duration-500 group-hover:shadow-[0_0_36px_rgba(123,122,255,0.35)] md:px-8 md:text-lg"
+                style={{ background: "var(--brand)", color: "var(--paper)" }}
+              >
+                <span className="relative z-10">导航至创客厅</span>
+                <span
+                  className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--paper)]/20 transition-all duration-500 group-hover:rotate-45 group-hover:bg-[var(--paper)]/30"
+                >
+                  <ArrowUpRight className="h-4 w-4" />
+                </span>
+                <span
+                  aria-hidden
+                  className="absolute inset-0 -z-0 translate-y-full bg-[var(--ink)] transition-transform duration-500 group-hover:translate-y-0"
+                />
+               
+              </span>
             </a>
           </div>
         </div>
 
         <div className="mt-20 flex flex-col gap-3 border-t border-[var(--paper)]/15 pt-6 text-xs text-[var(--paper)]/50 md:flex-row md:items-center md:justify-between">
           <span>© {new Date().getFullYear()} 创客厅 / DN杭州 · 杭创营</span>
-          <span className="font-serif-italic">Questioners of the world, unite.</span>
+          <span >INNOVATORS OF THE WORLD, UNITE.</span>
         </div>
       </div>
     </footer>
