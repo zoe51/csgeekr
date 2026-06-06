@@ -9,7 +9,7 @@ import catalogImg from "@/assets/catalog.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "创客厅 · 全世界的提问者联合起来" },
+      { title: "创客厅 · 全世界的创造者联合起来" },
       { name: "description", content: "我们在杭州，为充满好奇和创造力的人打造了一个创业者会客厅。一个好问题，比一百个答案更有力量。" },
       { property: "og:title", content: "创客厅 · 全世界的提问者联合起来" },
       { property: "og:description", content: "在杭州，由问题驱动的创业者会客厅。" },
@@ -64,7 +64,7 @@ function Nav() {
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
         <a href="/" className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
           <span className="inline-block h-3 w-3 rounded-full" style={{ background: "var(--brand)" }} />
-          DN杭州 · 杭创营
+          创 · DN杭州 · 杭创营
         </a>
         <nav className="hidden gap-8 text-sm md:flex">
           <a href="#what" className="hover:text-[var(--brand)] transition">关于</a>
@@ -113,13 +113,12 @@ function Hero() {
               className="font-display text-[var(--paper)] leading-[0.92] text-[clamp(2.75rem,9vw,11rem)]"
             >
               <span className="font-light">全世界的</span>
-              <span className="font-serif-italic font-normal italic text-[var(--paper)]/80"> all </span>
               <br />
               <span
                 className="inline-block px-3 md:px-5 font-bold align-baseline text-[var(--paper)]"
                 style={{ background: "var(--brand)" }}
               >
-                提问者
+                创造者
               </span>
               <span className="font-light">联合</span><span className="font-bold">起来</span>
             </motion.h1>
@@ -132,13 +131,6 @@ function Hero() {
               >
                 我们在杭州，为那些充满好奇和创造力的人，打造了一个创业者会客厅。
               </motion.p>
-              <a
-                href="#visit"
-                className="group inline-flex items-center gap-3 self-start rounded-full bg-[var(--paper)] px-7 py-4 font-display text-sm font-medium text-[var(--ink)] transition hover:bg-white"
-              >
-                导航至创客厅
-                <span className="transition group-hover:translate-x-1" aria-hidden>→</span>
-              </a>
             </div>
           </div>
         </div>
@@ -205,7 +197,7 @@ function SectionWhat() {
   return (
     <section id="what" className="relative px-6 py-32 md:px-10 md:py-44">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal><SectionLabel n="01">我们在做什么</SectionLabel></Reveal>
+        <Reveal><SectionLabel n="01">我们看重什么</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12">
           <Reveal className="md:col-span-7">
             <h2 className="font-display text-5xl leading-[1.02] md:text-[6.5rem]">
@@ -253,23 +245,21 @@ function SectionDetails() {
           />
         </div>
         <div className="px-6 py-20 md:px-14 md:py-28">
-          <Reveal><SectionLabel n="02">什么样的问题值得被找</SectionLabel></Reveal>
+          <Reveal><SectionLabel n="02"><span className="text-white">从哪个问题开始？</span></SectionLabel></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-8 font-display text-5xl leading-[1.02] md:text-7xl">
               <span className="font-bold">伟大</span>
-              <span className="font-serif-italic italic font-normal text-[var(--paper)]/70"> often </span>
+           
               <br />
               <span className="inline-block px-2 md:px-3 my-1 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
-                往往藏于
+                往往藏于细节
               </span><br />
-              <span className="font-light">细</span><span className="font-bold">节</span>
+              
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-[var(--paper)]/80 md:text-lg">
-              不必从一个宏大的问题开始，伟大的事情往往诞生于细节之中。
-              <span className="font-display font-medium"> Greatness lives in the details. </span>
-              很多真正重要的问题，一开始都不是以"大问题"的形式出现的，而是以一种微妙的不舒服、好奇、疑惑、荒诞、困惑出现的。
+              不必从一个宏大的问题开始，很多真正重要的问题，一开始都不是以"大问题"的形式出现的，而是以一种微妙的不舒服、好奇、疑惑、荒诞、困惑出现的。
             </p>
           </Reveal>
           <ul className="mt-12 space-y-6">
@@ -302,7 +292,7 @@ function SectionWho() {
   return (
     <section ref={ref} className="px-6 py-32 md:px-10 md:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal><SectionLabel n="03">我们是谁</SectionLabel></Reveal>
+        <Reveal><SectionLabel n="03">我们想邀请你一起</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12 md:items-end">
           <Reveal delay={0.15} className="md:col-span-6 md:col-start-7 order-2 md:order-1">
             <p className="text-lg leading-relaxed md:text-xl">
@@ -319,7 +309,9 @@ function SectionWho() {
               className="mt-10 relative inline-block font-display text-2xl md:text-3xl leading-snug"
             >
               <span className="relative z-10 px-3 py-1" style={{ background: "var(--brand)", color: "var(--paper)" }}>
-                我们期待，一个好问题，可以成为一段好关系的媒介。
+              我们期待, 
+                <br />
+                一个好问题，可以成为一段好关系的媒介。
               </span>
             </motion.p>
           </Reveal>
@@ -343,7 +335,7 @@ function SectionWho() {
 
 function SectionAmenities() {
   const current = [
-    "40个公园临窗工位",
+    "40个免费公园临窗工位",
     "半户外开放式咖啡讨论区",
     "专业技术与创业书籍借阅",
     "拓竹3D打印设备",
@@ -351,11 +343,12 @@ function SectionAmenities() {
     "免费注册公司 + 创业政策对接 + 算力补贴支持",
   ];
   const future = [
+    "4000平超大创意办公空间",
+    "Maker Lab元宇宙设备（VR / 触感手套 / 空间音频  / 全向跑步机等）",
+    "可容纳200+伙伴的住宿区",
     "项目路演舞台",
-    "Maker Lab元宇宙设备（VR / 触感手套 / 全向跑步机等）",
-    "长期住宿区",
-    "餐饮健身区",
-    "多媒体娱乐室",
+    "多媒体娱乐室和餐饮区",
+    "初创项目1v1免费咨询和投融资对接支持",
   ];
   return (
     <section id="space" className="px-6 py-32 md:px-10 md:py-44" style={{ background: "var(--brand)", color: "var(--paper)" }}>
@@ -363,7 +356,7 @@ function SectionAmenities() {
         <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--paper)]/70">
           <span className="font-display font-bold text-[var(--paper)]">04</span>
           <span className="h-px flex-1 max-w-12 bg-[var(--paper)]/40" />
-          会客厅现在能给你什么
+          创客厅基础设施
         </div>
         <AnimatedAmenitiesTitle />
 
@@ -437,11 +430,10 @@ function SectionCatalog() {
   return (
     <section ref={ref} id="catalog" className="px-6 py-32 md:px-10 md:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal><SectionLabel n="05">这里的社区在做什么</SectionLabel></Reveal>
+        <Reveal><SectionLabel n="05">来创客厅，共同创造新时代</SectionLabel></Reveal>
         <Reveal delay={0.1}>
           <h2 className="mt-10 font-display text-5xl leading-[1.02] md:text-[7rem]">
             <span className="font-light">一起</span><span className="font-bold">筹备</span><br />
-            <span className="font-serif-italic italic font-normal text-[var(--brand)]">new era </span>
             <span className="font-light">新时代的</span><br />
             <span className="inline-block px-3 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
               「新全球概览」
@@ -475,7 +467,7 @@ function SectionCatalog() {
               因此，我们也想要借助这次机会，将大家的提问和洞见，打造成独属于这个时代的"全球概览"。把好问题、好思路、好方案都收录起来，成为贡献给这个时代的开源资产。
             </p>
             <blockquote className="border-l-2 pl-6 font-display text-2xl leading-snug" style={{ borderColor: "var(--brand)" }}>
-              它将成为一张活的问题地图：记录此地此刻的人们，正在如何重新理解工具、地方、生活、知识、协作与未来。
+              也许我们可以一起，为这个世界贡献一张活的问题地图：记录此地此刻的人们，正在如何重新理解工具、地方、生活、知识、协作与未来。
             </blockquote>
           </Reveal>
         </div>
@@ -519,8 +511,7 @@ function FooterCTA() {
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--paper)]/60">直达创客厅 · DROP BY</p>
         <h2 className="mt-8 font-display leading-[0.92] text-[clamp(3rem,12vw,15rem)]">
           <span className="font-light">全世界的</span>
-          <span className="font-serif-italic italic font-normal text-[var(--paper)]/70"> all </span><br />
-          <span className="inline-block px-3 md:px-5 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>提问者</span><br />
+          <span className="inline-block px-3 md:px-5 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>创造者</span><br />
           <span className="font-light">联合</span><span className="font-bold">起来</span>
           <span className="font-serif-italic italic font-normal text-[var(--brand)]">.</span>
         </h2>
@@ -536,8 +527,8 @@ function FooterCTA() {
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--paper)]/50">HOURS</p>
             <p className="mt-3 font-display text-lg">
-              周一至周日<br />
-              09:00 — 22:00
+              周一至周五<br />
+              08:00 — 22:00
             </p>
           </div>
           <div className="flex md:justify-end">
@@ -553,7 +544,7 @@ function FooterCTA() {
         </div>
 
         <div className="mt-20 flex flex-col gap-3 border-t border-[var(--paper)]/15 pt-6 text-xs text-[var(--paper)]/50 md:flex-row md:items-center md:justify-between">
-          <span>© {new Date().getFullYear()} 创客厅 / Makers Hall — Hangzhou</span>
+          <span>© {new Date().getFullYear()} 创客厅 / DN杭州 · 杭创营</span>
           <span className="font-serif-italic">Questioners of the world, unite.</span>
         </div>
       </div>
