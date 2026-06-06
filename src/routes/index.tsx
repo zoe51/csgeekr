@@ -430,8 +430,12 @@ function SectionAmenities() {
 }
 
 function SectionCatalog() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const imgRotate = useTransform(scrollYProgress, [0, 1], [-4, 4]);
+  const imgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
   return (
-    <section id="catalog" className="px-6 py-32 md:px-10 md:py-44">
+    <section ref={ref} id="catalog" className="px-6 py-32 md:px-10 md:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
         <Reveal><SectionLabel n="05">这里的社区在做什么</SectionLabel></Reveal>
         <Reveal delay={0.1}>
@@ -448,10 +452,7 @@ function SectionCatalog() {
         <div className="mt-16 grid gap-12 md:grid-cols-12">
           <Reveal className="md:col-span-5">
             <motion.img
-              initial={{ scale: 1.15 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.4 }}
+              style={{ rotate: imgRotate, y: imgY }}
               src={catalogImg}
               alt="Whole Earth Catalog 致敬"
               width={1600}
