@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import heroImg from "@/assets/hero.jpg";
 import questionsImg from "@/assets/questions.jpg";
