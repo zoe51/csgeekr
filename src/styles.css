@@ -104,6 +104,7 @@
   --font-display: "Space Grotesk", "Noto Sans SC", sans-serif;
   --font-body: "Noto Sans SC", "Inter", system-ui, sans-serif;
   --font-serif: "Instrument Serif", "Noto Serif SC", serif;
+  --font-cn-display: "ZCOOL QingKe HuangYou", "Noto Sans SC", sans-serif;
 }
 
 .dark {
@@ -166,6 +167,11 @@
   .font-serif-italic {
     font-family: var(--font-serif);
     font-style: italic;
+  }
+  .font-cn {
+    font-family: var(--font-cn-display);
+    font-weight: 400;
+    letter-spacing: 0.02em;
   }
 
   .grain::before {
