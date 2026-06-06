@@ -208,9 +208,12 @@ function SectionWhat() {
         <Reveal><SectionLabel n="01">我们在做什么</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12">
           <Reveal className="md:col-span-7">
-            <h2 className="font-display text-5xl leading-[1.05] md:text-[6.5rem]">
-              好的提问，<br />
-              比答案<span className="inline-block px-2 md:px-3 ml-2" style={{ background: "var(--brand)", color: "var(--paper)" }}>更重要</span>
+            <h2 className="font-display text-5xl leading-[1.02] md:text-[6.5rem]">
+              <span className="font-light">好的</span><span className="font-bold">提问</span>
+              <span className="font-serif-italic italic font-normal text-[var(--brand)]">，</span>
+              <br />
+              <span className="font-light">比答案</span>
+              <span className="inline-block px-2 md:px-3 ml-2 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>更重要</span>
             </h2>
           </Reveal>
           <Reveal delay={0.15} className="space-y-6 self-end text-lg leading-relaxed md:col-span-5 md:text-xl">
@@ -252,12 +255,14 @@ function SectionDetails() {
         <div className="px-6 py-20 md:px-14 md:py-28">
           <Reveal><SectionLabel n="02">什么样的问题值得被找</SectionLabel></Reveal>
           <Reveal delay={0.1}>
-            <h2 className="mt-8 font-display text-5xl leading-[1.05] md:text-7xl">
-              伟大<br />
-              <span className="inline-block px-2 md:px-3 my-1" style={{ background: "var(--brand)", color: "var(--paper)" }}>
+            <h2 className="mt-8 font-display text-5xl leading-[1.02] md:text-7xl">
+              <span className="font-bold">伟大</span>
+              <span className="font-serif-italic italic font-normal text-[var(--paper)]/70"> often </span>
+              <br />
+              <span className="inline-block px-2 md:px-3 my-1 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
                 往往藏于
               </span><br />
-              细节
+              <span className="font-light">细</span><span className="font-bold">节</span>
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
@@ -316,13 +321,15 @@ function SectionWho() {
             </motion.p>
           </Reveal>
           <Reveal className="md:col-span-12 md:row-start-1 order-1">
-            <h2 className="font-display text-5xl leading-[1.05] md:text-[10rem]">
-              来线下，<br />
-              遇见
-              <span className="inline-block px-3 md:px-5 ml-2" style={{ background: "var(--brand)", color: "var(--paper)" }}>
+            <h2 className="font-display text-5xl leading-[0.98] md:text-[10rem]">
+              <span className="font-light">来</span><span className="font-bold">线下</span>
+              <span className="font-serif-italic italic font-normal text-[var(--brand)]">，</span>
+              <br />
+              <span className="font-light">遇见</span>
+              <span className="inline-block px-3 md:px-5 ml-2 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
                 同类
               </span>
-              。
+              <span className="font-serif-italic italic font-normal">.</span>
             </h2>
           </Reveal>
         </div>
@@ -425,10 +432,11 @@ function SectionCatalog() {
       <div className="mx-auto max-w-[1400px]">
         <Reveal><SectionLabel n="05">这里的社区在做什么</SectionLabel></Reveal>
         <Reveal delay={0.1}>
-          <h2 className="mt-10 font-display text-5xl leading-[1.05] md:text-[7rem]">
-            一起筹备<br />
-            新时代的<br />
-            <span className="inline-block px-3" style={{ background: "var(--brand)", color: "var(--paper)" }}>
+          <h2 className="mt-10 font-display text-5xl leading-[1.02] md:text-[7rem]">
+            <span className="font-light">一起</span><span className="font-bold">筹备</span><br />
+            <span className="font-serif-italic italic font-normal text-[var(--brand)]">new era </span>
+            <span className="font-light">新时代的</span><br />
+            <span className="inline-block px-3 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
               「新全球概览」
             </span>
           </h2>
