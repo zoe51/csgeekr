@@ -82,8 +82,8 @@ function Nav() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[var(--paper)]/85 backdrop-blur-md border-b border-[var(--ink)]/10 shadow-[0_1px_0_rgba(0,0,0,0.04)]"
-          : "bg-transparent"
+          ? "translate-y-0 opacity-100 bg-[var(--paper)]/85 backdrop-blur-md border-b border-[var(--ink)]/10 shadow-[0_1px_0_rgba(0,0,0,0.04)]"
+          : "bg-transparent -translate-y-full opacity-0 md:translate-y-0 md:opacity-100"
       }`}
     >
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
@@ -125,7 +125,7 @@ function Hero() {
   const heroY = useTransform(scrollY, [0, 600], [0, 120]);
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0.4]);
   return (
-    <section className="relative min-h-screen w-full overflow-hidden pt-24">
+    <section className="relative min-h-screen w-full overflow-hidden pt-0 md:pt-24">
       <div className="relative mx-auto h-[88vh] w-[calc(100%-2rem)] max-w-[1600px] overflow-hidden md:w-[calc(100%-5rem)]">
         <motion.img
           style={{ y: heroY, opacity: heroOpacity }}
@@ -183,7 +183,7 @@ function Marquee() {
     "not by tasks",
     "好的提问 · 比答案更重要",
     "Greatness lives in the details",
-    "杭州 · 拱墅 · 科祥街",
+    "杭州 · 拱墅 · 创客厅",
     "New Whole Earth Catalog",
   ];
   return (
@@ -285,7 +285,7 @@ function SectionDetails() {
           <Reveal><SectionLabel n="02"><span className="text-white">从哪个问题开始？</span></SectionLabel></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-8 font-display text-5xl leading-[1.02] md:text-7xl">
-              <span className="font-bold">伟大</span>
+              <span className="font-bold">卓越的创造力</span>
            
               <br />
               <span className="inline-block px-2 md:px-3 my-1 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
@@ -354,7 +354,7 @@ function SectionWho() {
           </Reveal>
           <Reveal className="md:col-span-12 md:row-start-1 order-1">
             <motion.h2 style={{ x: titleX }} className="font-display text-5xl leading-[0.98] md:text-[10rem]">
-              <span className="font-light">来</span><span className="font-bold">线下</span>
+              <span className="font-light">来</span><span className="font-bold">线下创客厅</span>
               <span className="font-serif-italic italic font-normal text-[var(--brand)]">，</span>
               <br />
               <span className="font-light">遇见</span>
