@@ -481,20 +481,27 @@ function SectionCatalog() {
 }
 
 function AnimatedAmenitiesTitle() {
-  const chars = ["创", "客", "厅", "有", "什", "么"];
+  const parts = [
+    { c: "创", w: "font-light" },
+    { c: "客", w: "font-bold" },
+    { c: "厅", w: "font-light" },
+    { c: "有", w: "font-serif-italic italic font-normal" },
+    { c: "什", w: "font-bold" },
+    { c: "么", w: "font-light" },
+  ];
   return (
-    <h2 className="mt-10 font-display text-5xl leading-[1.05] md:text-[8rem] flex flex-wrap">
-      {chars.map((c, i) => (
+    <h2 className="mt-10 font-display text-5xl leading-[1.02] md:text-[8rem] flex flex-wrap items-baseline">
+      {parts.map((p, i) => (
         <motion.span
           key={i}
-          initial={{ opacity: 0, y: 60, rotate: -8 }}
+          initial={{ opacity: 0, y: 80, rotate: -8 }}
           whileInView={{ opacity: 1, y: 0, rotate: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-          whileHover={{ y: -10, color: "var(--paper)" }}
-          className="inline-block cursor-default"
+          whileHover={{ y: -12 }}
+          className={`inline-block cursor-default ${p.w}`}
         >
-          {c}
+          {p.c}
         </motion.span>
       ))}
     </h2>
@@ -506,10 +513,12 @@ function FooterCTA() {
     <footer id="visit" className="relative px-6 py-24 md:px-10 md:py-32" style={{ background: "var(--ink)", color: "var(--paper)" }}>
       <div className="mx-auto max-w-[1600px]">
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--paper)]/60">直达创客厅 · DROP BY</p>
-        <h2 className="mt-8 font-display leading-[0.95] text-[clamp(3rem,12vw,15rem)]">
-          全世界的<br />
-          <span className="inline-block px-3 md:px-5" style={{ background: "var(--brand)", color: "var(--paper)" }}>提问者</span><br />
-          联合起来。
+        <h2 className="mt-8 font-display leading-[0.92] text-[clamp(3rem,12vw,15rem)]">
+          <span className="font-light">全世界的</span>
+          <span className="font-serif-italic italic font-normal text-[var(--paper)]/70"> all </span><br />
+          <span className="inline-block px-3 md:px-5 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>提问者</span><br />
+          <span className="font-light">联合</span><span className="font-bold">起来</span>
+          <span className="font-serif-italic italic font-normal text-[var(--brand)]">.</span>
         </h2>
 
         <div className="mt-16 grid gap-10 border-t border-[var(--paper)]/20 pt-10 md:grid-cols-3">
