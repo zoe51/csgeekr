@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState, type ReactNode } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import heroImg from "@/assets/hero.jpg";
 import questionsImg from "@/assets/questions.jpg";
 import spaceImg from "@/assets/space.jpg";
@@ -21,6 +21,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <ScrollProgress />
       <Nav />
       <Hero />
       <SectionWhat />
@@ -30,6 +31,17 @@ function Index() {
       <SectionCatalog />
       <FooterCTA />
     </div>
+  );
+}
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.2 });
+  return (
+    <motion.div
+      style={{ scaleX, transformOrigin: "0% 50%", background: "var(--brand)" }}
+      className="fixed left-0 right-0 top-0 z-[60] h-[3px]"
+    />
   );
 }
 
@@ -98,16 +110,18 @@ function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-[var(--paper)] leading-[0.95] text-[clamp(2.75rem,9vw,11rem)]"
+              className="font-display text-[var(--paper)] leading-[0.92] text-[clamp(2.75rem,9vw,11rem)]"
             >
-              全世界的<br />
+              <span className="font-light">全世界的</span>
+              <span className="font-serif-italic font-normal italic text-[var(--paper)]/80"> all </span>
+              <br />
               <span
-                className="inline-block px-3 md:px-5 align-baseline text-[var(--paper)]"
+                className="inline-block px-3 md:px-5 font-bold align-baseline text-[var(--paper)]"
                 style={{ background: "var(--brand)" }}
               >
                 提问者
               </span>
-              联合起来
+              <span className="font-light">联合</span><span className="font-bold">起来</span>
             </motion.h1>
             <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <motion.p
@@ -194,9 +208,12 @@ function SectionWhat() {
         <Reveal><SectionLabel n="01">我们在做什么</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12">
           <Reveal className="md:col-span-7">
-            <h2 className="font-display text-5xl leading-[1.05] md:text-[6.5rem]">
-              好的提问，<br />
-              比答案<span className="inline-block px-2 md:px-3 ml-2" style={{ background: "var(--brand)", color: "var(--paper)" }}>更重要</span>
+            <h2 className="font-display text-5xl leading-[1.02] md:text-[6.5rem]">
+              <span className="font-light">好的</span><span className="font-bold">提问</span>
+              <span className="font-serif-italic italic font-normal text-[var(--brand)]">，</span>
+              <br />
+              <span className="font-light">比答案</span>
+              <span className="inline-block px-2 md:px-3 ml-2 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>更重要</span>
             </h2>
           </Reveal>
           <Reveal delay={0.15} className="space-y-6 self-end text-lg leading-relaxed md:col-span-5 md:text-xl">
@@ -238,12 +255,14 @@ function SectionDetails() {
         <div className="px-6 py-20 md:px-14 md:py-28">
           <Reveal><SectionLabel n="02">什么样的问题值得被找</SectionLabel></Reveal>
           <Reveal delay={0.1}>
-            <h2 className="mt-8 font-display text-5xl leading-[1.05] md:text-7xl">
-              伟大<br />
-              <span className="inline-block px-2 md:px-3 my-1" style={{ background: "var(--brand)", color: "var(--paper)" }}>
+            <h2 className="mt-8 font-display text-5xl leading-[1.02] md:text-7xl">
+              <span className="font-bold">伟大</span>
+              <span className="font-serif-italic italic font-normal text-[var(--paper)]/70"> often </span>
+              <br />
+              <span className="inline-block px-2 md:px-3 my-1 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
                 往往藏于
               </span><br />
-              细节
+              <span className="font-light">细</span><span className="font-bold">节</span>
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
@@ -277,8 +296,11 @@ function SectionDetails() {
 }
 
 function SectionWho() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const titleX = useTransform(scrollYProgress, [0, 1], [-60, 60]);
   return (
-    <section className="px-6 py-32 md:px-10 md:py-44">
+    <section ref={ref} className="px-6 py-32 md:px-10 md:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
         <Reveal><SectionLabel n="03">我们是谁</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12 md:items-end">
@@ -302,14 +324,16 @@ function SectionWho() {
             </motion.p>
           </Reveal>
           <Reveal className="md:col-span-12 md:row-start-1 order-1">
-            <h2 className="font-display text-5xl leading-[1.05] md:text-[10rem]">
-              来线下，<br />
-              遇见
-              <span className="inline-block px-3 md:px-5 ml-2" style={{ background: "var(--brand)", color: "var(--paper)" }}>
+            <motion.h2 style={{ x: titleX }} className="font-display text-5xl leading-[0.98] md:text-[10rem]">
+              <span className="font-light">来</span><span className="font-bold">线下</span>
+              <span className="font-serif-italic italic font-normal text-[var(--brand)]">，</span>
+              <br />
+              <span className="font-light">遇见</span>
+              <span className="inline-block px-3 md:px-5 ml-2 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
                 同类
               </span>
-              。
-            </h2>
+              <span className="font-serif-italic italic font-normal">.</span>
+            </motion.h2>
           </Reveal>
         </div>
       </div>
@@ -406,15 +430,20 @@ function SectionAmenities() {
 }
 
 function SectionCatalog() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const imgRotate = useTransform(scrollYProgress, [0, 1], [-4, 4]);
+  const imgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
   return (
-    <section id="catalog" className="px-6 py-32 md:px-10 md:py-44">
+    <section ref={ref} id="catalog" className="px-6 py-32 md:px-10 md:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
         <Reveal><SectionLabel n="05">这里的社区在做什么</SectionLabel></Reveal>
         <Reveal delay={0.1}>
-          <h2 className="mt-10 font-display text-5xl leading-[1.05] md:text-[7rem]">
-            一起筹备<br />
-            新时代的<br />
-            <span className="inline-block px-3" style={{ background: "var(--brand)", color: "var(--paper)" }}>
+          <h2 className="mt-10 font-display text-5xl leading-[1.02] md:text-[7rem]">
+            <span className="font-light">一起</span><span className="font-bold">筹备</span><br />
+            <span className="font-serif-italic italic font-normal text-[var(--brand)]">new era </span>
+            <span className="font-light">新时代的</span><br />
+            <span className="inline-block px-3 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
               「新全球概览」
             </span>
           </h2>
@@ -423,10 +452,7 @@ function SectionCatalog() {
         <div className="mt-16 grid gap-12 md:grid-cols-12">
           <Reveal className="md:col-span-5">
             <motion.img
-              initial={{ scale: 1.15 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.4 }}
+              style={{ rotate: imgRotate, y: imgY }}
               src={catalogImg}
               alt="Whole Earth Catalog 致敬"
               width={1600}
@@ -459,20 +485,27 @@ function SectionCatalog() {
 }
 
 function AnimatedAmenitiesTitle() {
-  const chars = ["创", "客", "厅", "有", "什", "么"];
+  const parts = [
+    { c: "创", w: "font-light" },
+    { c: "客", w: "font-bold" },
+    { c: "厅", w: "font-light" },
+    { c: "有", w: "font-serif-italic italic font-normal" },
+    { c: "什", w: "font-bold" },
+    { c: "么", w: "font-light" },
+  ];
   return (
-    <h2 className="mt-10 font-display text-5xl leading-[1.05] md:text-[8rem] flex flex-wrap">
-      {chars.map((c, i) => (
+    <h2 className="mt-10 font-display text-5xl leading-[1.02] md:text-[8rem] flex flex-wrap items-baseline">
+      {parts.map((p, i) => (
         <motion.span
           key={i}
-          initial={{ opacity: 0, y: 60, rotate: -8 }}
+          initial={{ opacity: 0, y: 80, rotate: -8 }}
           whileInView={{ opacity: 1, y: 0, rotate: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-          whileHover={{ y: -10, color: "var(--paper)" }}
-          className="inline-block cursor-default"
+          whileHover={{ y: -12 }}
+          className={`inline-block cursor-default ${p.w}`}
         >
-          {c}
+          {p.c}
         </motion.span>
       ))}
     </h2>
@@ -484,10 +517,12 @@ function FooterCTA() {
     <footer id="visit" className="relative px-6 py-24 md:px-10 md:py-32" style={{ background: "var(--ink)", color: "var(--paper)" }}>
       <div className="mx-auto max-w-[1600px]">
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--paper)]/60">直达创客厅 · DROP BY</p>
-        <h2 className="mt-8 font-display leading-[0.95] text-[clamp(3rem,12vw,15rem)]">
-          全世界的<br />
-          <span className="inline-block px-3 md:px-5" style={{ background: "var(--brand)", color: "var(--paper)" }}>提问者</span><br />
-          联合起来。
+        <h2 className="mt-8 font-display leading-[0.92] text-[clamp(3rem,12vw,15rem)]">
+          <span className="font-light">全世界的</span>
+          <span className="font-serif-italic italic font-normal text-[var(--paper)]/70"> all </span><br />
+          <span className="inline-block px-3 md:px-5 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>提问者</span><br />
+          <span className="font-light">联合</span><span className="font-bold">起来</span>
+          <span className="font-serif-italic italic font-normal text-[var(--brand)]">.</span>
         </h2>
 
         <div className="mt-16 grid gap-10 border-t border-[var(--paper)]/20 pt-10 md:grid-cols-3">
