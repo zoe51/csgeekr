@@ -1,11 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowUpRight, Check, Copy } from "lucide-react";
+import { ArrowUpRight, Check, Copy, MapPin } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import questionsImg from "@/assets/questions.jpg";
 import spaceImg from "@/assets/space.jpg";
 import catalogImg from "@/assets/catalog.jpg";
+
+// 高德地图坐标 (GCJ-02) — 创客厅 · 汇金云创
+const CREATIVE_LOUNGE_LOCATION = {
+  lat: 30.345678,
+  lng: 120.155432,
+  name: "创客厅 · 汇金云创",
+};
+
+// 站点头像 / favicon
+const LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/cslogo.png";
+
+// 唤起高德地图导航:PC 跳转网页端、移动端唤起 App
+function openAmapUniversal({ lat, lng, name }: { lat: number; lng: number; name: string }) {
+  const destName = encodeURIComponent(name);
+  // uri.amap.com 会自动判断设备,唤起 App 或跳转网页
+  const url = `https://uri.amap.com/navigation?to=${lng},${lat},${destName}&mode=car&policy=1&src=csgeekr&coordinate=gaode&callnative=1`;
+  window.open(url, "_blank");
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -14,6 +32,11 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "我们在杭州，为充满好奇和创造力的人打造了一个创业者会客厅。一个好问题，比一百个答案更有力量。" },
       { property: "og:title", content: "创客厅 · 全世界的提问者联合起来" },
       { property: "og:description", content: "在杭州，由问题驱动的创业者会客厅。" },
+      { property: "og:image", content: LOGO_URL },
+    ],
+    links: [
+      { rel: "icon", href: LOGO_URL, type: "image/png" },
+      { rel: "apple-touch-icon", href: LOGO_URL },
     ],
   }),
   component: Index,
@@ -64,8 +87,12 @@ function Nav() {
     >
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
         <a href="/" className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
-          <span className="inline-block h-3 w-3 rounded-full" style={{ background: "var(--brand)" }} />
-          创 · DN杭州 · 杭创营
+          <img
+            src={LOGO_URL}
+            alt="创客厅 logo"
+            className="h-7 w-7 rounded-full object-cover"
+          />
+          DN杭州 · 杭创营
         </a>
         <nav className="hidden gap-8 text-sm md:flex">
           <a href="#what" className="hover:text-[var(--brand)] transition">关于</a>
@@ -74,7 +101,14 @@ function Nav() {
           <a href="#visit" className="hover:text-[var(--brand)] transition">到访</a>
         </nav>
         <a
-          href="#visit"
+          href={`https://uri.amap.com/navigation?to=${CREATIVE_LOUNGE_LOCATION.lng},${CREATIVE_LOUNGE_LOCATION.lat},${encodeURIComponent(CREATIVE_LOUNGE_LOCATION.name)}&mode=car&policy=1&src=csgeekr&coordinate=gaode&callnative=1`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => {
+            e.preventDefault();
+            openAmapUniversal(CREATIVE_LOUNGE_LOCATION);
+          }}
+          aria-label="使用高德地图导航至创客厅"
           className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-[var(--paper)] transition hover:opacity-90"
           style={{ background: "var(--brand)" }}
         >
@@ -130,7 +164,7 @@ function Hero() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="max-w-xl text-base text-[var(--paper)]/90 md:text-lg"
               >
-                我们在杭州，为那些充满好奇和创造力的人，打造了一个创业者会客厅。
+                我们在杭州，为那些充满好奇和创造力的人，打造了一个创造者会客厅。
               </motion.p>
             </div>
           </div>
@@ -576,7 +610,14 @@ function FooterCTA() {
           </div>
           <div className="flex md:justify-end">
             <a
-              href="#"
+              href={`https://uri.amap.com/navigation?to=${CREATIVE_LOUNGE_LOCATION.lng},${CREATIVE_LOUNGE_LOCATION.lat},${encodeURIComponent(CREATIVE_LOUNGE_LOCATION.name)}&mode=car&policy=1&src=csgeekr&coordinate=gaode&callnative=1`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                openAmapUniversal(CREATIVE_LOUNGE_LOCATION);
+              }}
+              aria-label="使用高德地图导航至创客厅"
               className="group relative inline-flex flex-col items-start gap-3 self-start"
             >
               <span
@@ -591,7 +632,8 @@ function FooterCTA() {
               />
               <span className="flex items-center gap-3 text-[10px] uppercase tracking-[0.32em] text-[var(--paper)]/65">
                 <span className="h-px w-7 bg-[var(--brand)]" />
-                Navigate
+                <MapPin className="h-3 w-3" style={{ color: "var(--brand)" }} />
+                在高德地图打开
               </span>
               <span
                 className="relative inline-flex items-center gap-4 overflow-hidden rounded-full px-7 py-4 font-display text-base font-medium tracking-wide transition-all duration-500 group-hover:shadow-[0_0_36px_rgba(123,122,255,0.35)] md:px-8 md:text-lg"
@@ -607,7 +649,7 @@ function FooterCTA() {
                   aria-hidden
                   className="absolute inset-0 -z-0 translate-y-full bg-[var(--ink)] transition-transform duration-500 group-hover:translate-y-0"
                 />
-               
+                
               </span>
             </a>
           </div>
