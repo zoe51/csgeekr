@@ -7,10 +7,11 @@ import questionsImg from "@/assets/questions.jpg";
 import spaceImg from "@/assets/space.jpg";
 import catalogImg from "@/assets/catalog.jpg";
 
-// 高德地图坐标 (GCJ-02) — 创客厅 · 汇金云创
+// 高德地图坐标 (GCJ-02) — 创客厅 · 汇金云创·人才科创综合体
+// 来源:https://surl.amap.com/1CfCqvUr15I
 const CREATIVE_LOUNGE_LOCATION = {
-  lat: 30.345678,
-  lng: 120.155432,
+  lat: 30.335792,
+  lng: 120.158111,
   name: "创客厅 · 汇金云创",
 };
 
@@ -138,14 +139,14 @@ function Hero() {
         <div className="relative z-10 flex h-full flex-col justify-between p-6 md:p-12">
           <div className="flex items-center justify-between text-[var(--paper)]/80 text-xs uppercase tracking-[0.2em]">
             <span>EST. 2026 · Hangzhou</span>
-            <span>No. 001 — Questioners, Unite</span>
+            <span>No. 001 — Innovators, United</span>
           </div>
           <div>
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-[var(--paper)] leading-[0.92] text-[clamp(2.75rem,9vw,11rem)]"
+              className="font-display text-[var(--paper)] leading-[0.92] text-[clamp(3.5rem,9vw,11rem)]"
             >
               <span className="font-light">全世界的</span>
               <br />
@@ -155,6 +156,7 @@ function Hero() {
               >
                 创造者
               </span>
+              <br className="md:hidden" />
               <span className="font-light">联合</span><span className="font-bold">起来</span>
             </motion.h1>
             <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -189,7 +191,7 @@ function Marquee() {
       className="overflow-hidden border-y py-5 font-display text-xl"
       style={{ background: "var(--brand)", color: "var(--paper)" }}
     >
-      <div className="flex animate-[scroll_40s_linear_infinite] gap-12 whitespace-nowrap">
+      <div className="flex animate-[scroll_20s_linear_infinite] gap-12 whitespace-nowrap md:animate-[scroll_40s_linear_infinite]">
         {[...items, ...items, ...items].map((t, i) => (
           <span key={i} className="flex items-center gap-12">
             {t}
@@ -258,9 +260,9 @@ function SectionWhat() {
 
 function SectionDetails() {
   const questions = [
-    "为什么我们有这么多AI提效工具，反而更焦虑了？",
-    "为什么越来越多人想逃离大城市，却不确定离开后应该如何生活？",
-    "为什么有越来越多的孩子患上了抑郁症？",
+    "有这么多AI提效工具，为什么人反而更焦虑？",
+    "逃离大城市内卷后应该如何生活？",
+    "为什么100w的充电头可以做的如此之小？",
   ];
   return (
     <section className="relative overflow-hidden text-[var(--paper)]" style={{ background: "var(--ink)" }}>
@@ -344,9 +346,9 @@ function SectionWho() {
               className="mt-10 relative inline-block font-display text-2xl md:text-3xl leading-snug"
             >
               <span className="relative z-10 px-3 py-1" style={{ background: "var(--brand)", color: "var(--paper)" }}>
-              我们期待, 
+              我们期待, 一个好问题，
                 <br />
-                一个好问题，可以成为一段好关系的媒介。
+                可以成为一段好关系的媒介。
               </span>
             </motion.p>
           </Reveal>
@@ -467,10 +469,10 @@ function SectionCatalog() {
       <div className="mx-auto max-w-[1400px]">
         <Reveal><SectionLabel n="05">来创客厅，共同创造新时代</SectionLabel></Reveal>
         <Reveal delay={0.1}>
-          <h2 className="mt-10 font-display text-5xl leading-[1.02] md:text-[7rem]">
+          <h2 className="mt-10 font-display text-4xl leading-[1.02] md:text-[7rem]">
             <span className="font-light">一起</span><span className="font-bold">筹备</span><br />
             <span className="font-light">新时代的</span><br />
-            <span className="inline-block px-3 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
+            <span className="inline-block whitespace-nowrap px-3 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
               「新全球概览」
             </span>
           </h2>
@@ -521,7 +523,7 @@ function AnimatedAmenitiesTitle() {
     { c: "么", w: "font-light" },
   ];
   return (
-    <h2 className="mt-10 font-display text-5xl leading-[1.02] md:text-[8rem] flex flex-wrap items-baseline">
+    <h2 className="mt-10 font-display text-3xl leading-[1.02] md:text-[8rem] flex flex-nowrap items-baseline md:flex-wrap">
       {parts.map((p, i) => (
         <motion.span
           key={i}
@@ -540,7 +542,7 @@ function AnimatedAmenitiesTitle() {
 }
 
 function FooterCTA() {
-  const fullAddress = "杭州市拱墅区科祥街139号 汇金云创南门 6B-5楼";
+  const fullAddress = "杭州市拱墅区妙家浜巷59号 汇金云创·人才科创综合体";
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -576,8 +578,8 @@ function FooterCTA() {
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--paper)]/50">ADDRESS</p>
             <div className="mt-3 flex flex-wrap items-start gap-4">
               <p className="font-display text-lg leading-snug">
-                杭州市拱墅区科祥街139号<br />
-                汇金云创南门 6B-5楼
+                杭州市拱墅区妙家浜巷59号<br />
+                汇金云创·人才科创综合体
               </p>
               <button
                 type="button"
@@ -657,7 +659,7 @@ function FooterCTA() {
 
         <div className="mt-20 flex flex-col gap-3 border-t border-[var(--paper)]/15 pt-6 text-xs text-[var(--paper)]/50 md:flex-row md:items-center md:justify-between">
           <span>© {new Date().getFullYear()} 创客厅 / DN杭州 · 杭创营</span>
-          <span >INNOVATORS OF THE WORLD, UNITE.</span>
+          <span >浙ICP备2026032840号-1</span>
         </div>
       </div>
     </footer>
