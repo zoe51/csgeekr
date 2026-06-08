@@ -18,6 +18,9 @@ const CREATIVE_LOUNGE_LOCATION = {
 // 站点头像 / favicon
 const LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/cslogo.png";
 
+// DN-CN 数字游民中国 logo
+const DN_CN_LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/dncn.png";
+
 // 唤起高德地图导航:PC 跳转网页端、移动端唤起 App
 function openAmapUniversal({ lat, lng, name }: { lat: number; lng: number; name: string }) {
   const destName = encodeURIComponent(name);
@@ -29,9 +32,9 @@ function openAmapUniversal({ lat, lng, name }: { lat: number; lng: number; name:
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "创客厅 · 全世界的创造者联合起来" },
+      { title: "创客厅 · 全世界创造者联合起来" },
       { name: "description", content: "我们在杭州，为充满好奇和创造力的人打造了一个创业者会客厅。一个好问题，比一百个答案更有力量。" },
-      { property: "og:title", content: "创客厅 · 全世界的提问者联合起来" },
+      { property: "og:title", content: "创客厅 · 全世界创造者联合起来" },
       { property: "og:description", content: "在杭州，由问题驱动的创业者会客厅。" },
       { property: "og:image", content: LOGO_URL },
     ],
@@ -49,6 +52,7 @@ function Index() {
       <ScrollProgress />
       <Nav />
       <Hero />
+      <SectionDNIntro />
       <SectionWhat />
       <SectionDetails />
       <SectionWho />
@@ -138,7 +142,7 @@ function Hero() {
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 flex h-full flex-col justify-between p-6 md:p-12">
           <div className="flex items-center justify-between text-[var(--paper)]/80 text-xs uppercase tracking-[0.2em]">
-            <span>EST. 2026 · Hangzhou</span>
+            <span>SINCE. 2026 · Hangzhou</span>
             <span>No. 001 — Innovators, United</span>
           </div>
           <div>
@@ -148,7 +152,7 @@ function Hero() {
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-[var(--paper)] leading-[0.92] text-[clamp(3.5rem,9vw,11rem)]"
             >
-              <span className="font-light">全世界的</span>
+              <span className="font-light">全世界</span>
               <br />
               <span
                 className="inline-block px-3 md:px-5 font-bold align-baseline text-[var(--paper)]"
@@ -179,12 +183,12 @@ function Hero() {
 
 function Marquee() {
   const items = [
-    "Driven by questions",
-    "not by tasks",
+    "Driven by questions，not tasks",
     "好的提问 · 比答案更重要",
     "Greatness lives in the details",
-    "杭州 · 拱墅 · 创客厅",
-    "New Whole Earth Catalog",
+     "新全球概览",
+    "Think Different",
+    "疯狂到想要改变世界的人",
   ];
   return (
     <div
@@ -201,6 +205,175 @@ function Marquee() {
       </div>
       <style>{`@keyframes scroll {from{transform:translateX(0)}to{transform:translateX(-33.333%)}}`}</style>
     </div>
+  );
+}
+
+function SectionDNIntro() {
+  const tags: { name: string; active: boolean; badge?: string; href: string }[] = [
+    { name: "DN安吉", active: false, href: "https://mp.weixin.qq.com/s/p7dtOobY-nqTRqb9J-oDEQ" },
+    { name: "DN余村", active: false, href: "https://mp.weixin.qq.com/s/HvsndB6cYz7c_1znxbAMzg?search_click_id=17752518889910846558-1780918107469-4649592575&sessionid=" },
+    { name: "DN黄山", active: false, href: "https://mp.weixin.qq.com/s/dJ1XYN8Qb67Qv717umB6YQ" },
+    { name: "DN武夷山", active: false, href: "https://mp.weixin.qq.com/s/GV9cWsqqzSaHV1frRuyGzA" },
+    { name: "DN杭州", active: true, badge: "即将开放", href: "https://csgeekr.com/" },
+  ];
+  return (
+    <section
+      id="dn-cn"
+      className="relative flex min-h-screen items-center overflow-hidden px-6 py-24 md:px-10 md:py-32"
+    >
+      {/* 背景装饰:角落大圆 + 网格 */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 0.08, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+        aria-hidden
+        className="pointer-events-none absolute -right-40 -top-40 h-[640px] w-[640px] rounded-full blur-3xl"
+        style={{ background: "var(--brand)" }}
+      />
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 0.5 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.4 }}
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-0"
+        style={{
+          backgroundImage: "radial-gradient(var(--ink) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          opacity: 0.06,
+        }}
+      />
+
+      <div className="relative mx-auto w-full max-w-[1400px]">
+        <Reveal>
+          <SectionLabel n="00">我们是谁</SectionLabel>
+        </Reveal>
+
+        <div className="mt-12 grid items-center gap-12 md:mt-16 md:grid-cols-12 md:gap-16">
+          {/* Logo 卡片 */}
+          <Reveal className="md:col-span-5">
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0, rotate: -4 }}
+              whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-3xl"
+              style={{ background: "var(--ink)" }}
+            >
+              <img
+                src={DN_CN_LOGO_URL}
+                alt="DN-CN 数字游民中国 Logo"
+                className="h-full w-full object-contain p-10 transition-transform duration-700 group-hover:scale-105 md:p-12"
+              />
+              {/* 四角装饰 */}
+              <span aria-hidden className="absolute left-4 top-4 h-3 w-3 border-l-2 border-t-2" style={{ borderColor: "var(--brand)" }} />
+              <span aria-hidden className="absolute right-4 top-4 h-3 w-3 border-r-2 border-t-2" style={{ borderColor: "var(--brand)" }} />
+              <span aria-hidden className="absolute left-4 bottom-4 h-3 w-3 border-l-2 border-b-2" style={{ borderColor: "var(--brand)" }} />
+              <span aria-hidden className="absolute right-4 bottom-4 h-3 w-3 border-r-2 border-b-2" style={{ borderColor: "var(--brand)" }} />
+              {/* 顶部小标签 */}
+              <div className="absolute left-6 top-6 flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[var(--paper)]/60">
+                <span className="h-px w-6 bg-[var(--brand)]" />
+                SINCE 2021
+              </div>
+            </motion.div>
+          </Reveal>
+
+          {/* 标题 + 内容 */}
+          <div className="space-y-10 md:col-span-7">
+            <Reveal delay={0.15}>
+              <div className="space-y-3">
+                <motion.span
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: 0.1 }}
+                  className="inline-flex items-center gap-2 font-serif-italic italic text-2xl text-[var(--brand)] md:text-3xl"
+                >
+                  <span aria-hidden className="h-px w-7 bg-[var(--brand)]" />
+                  我们是谁
+                </motion.span>
+                <h2 className="font-display leading-[0.92] text-5xl md:text-[6.5rem]">
+                  <span className="font-bold text-[var(--ink)]">DNCN </span>
+                  <br />
+                  <span
+                    className="inline-block px-2 md:px-3 font-bold"
+                    style={{ background: "var(--brand)", color: "var(--paper)" }}
+                  >
+                    数字游民
+                  </span>
+                  <br />
+                  <span className="font-light">中国</span>
+                  <span className="font-serif-italic italic font-normal text-[var(--brand)]">.</span>
+                </h2>
+              </div>
+            </Reveal>
+            <Reveal delay={0.25}>
+              <p className="max-w-2xl text-base leading-relaxed text-[var(--ink)]/75 md:text-lg">
+                我们是中国数字游民社区的先行者。2021 年在浙江安吉落地了国内首个数字游民共居空间，目前已在全国建立四大线下青年共居社区，并即将在杭州落成第五家开发者主题社区。DN-CN 汇聚了大量自由职业者与独立创业者，逐步构建起中国最具活力的数字游民生态圈。
+              </p>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* 标签行 */}
+        <Reveal delay={0.35} className="mt-16 md:mt-20">
+          <div className="border-t border-[var(--ink)]/10 pt-8">
+            <div className="mb-5 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--ink)]/50">
+              <span className="font-display font-bold" style={{ color: "var(--brand)" }}>
+                ★
+              </span>
+              <span>DN系社区 / 做世界的水手，奔赴所有港口</span>
+              <span className="h-px flex-1 max-w-24 bg-[var(--ink)]/20" />
+            </div>
+            <div className="flex flex-wrap items-center gap-3 md:gap-4">
+              {tags.map((tag, i) => {
+                const isExternal = !tag.href.includes("csgeekr.com");
+                return (
+                  <motion.a
+                    key={tag.name}
+                    href={tag.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.4 + i * 0.07 }}
+                    className="group relative inline-block"
+                    aria-label={`访问 ${tag.name} 社区`}
+                  >
+                    {tag.active ? (
+                      <span className="relative inline-flex items-center gap-2.5 overflow-hidden rounded-full px-6 py-3 font-display text-lg font-bold md:text-xl transition-transform duration-300 group-hover:-translate-y-1.5 group-hover:scale-[1.04]" style={{ background: "var(--brand)", color: "var(--paper)" }}>
+                        <motion.span
+                          animate={{ scale: [1, 1.5, 1], opacity: [1, 0.55, 1] }}
+                          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                          className="h-2 w-2 rounded-full bg-[var(--paper)]"
+                        />
+                        {tag.name}
+                        {tag.badge && (
+                          <span className="ml-1 rounded-full border border-[var(--paper)]/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.15em] opacity-90">
+                            {tag.badge}
+                          </span>
+                        )}
+                        <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-2 rounded-full border border-[var(--ink)]/15 bg-[var(--paper)] px-5 py-3 font-display text-base text-[var(--ink)]/70 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--brand)] hover:text-[var(--brand)] md:text-lg">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--ink)]/30 transition-colors group-hover:bg-[var(--brand)]" />
+                        {tag.name}
+                        <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" />
+                      </span>
+                    )}
+                  </motion.a>
+                );
+              })}
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
   );
 }
 
@@ -234,15 +407,19 @@ function SectionWhat() {
   return (
     <section id="what" className="relative px-6 py-32 md:px-10 md:py-44">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal><SectionLabel n="01">我们看重什么</SectionLabel></Reveal>
+        <Reveal><SectionLabel n="01">我们在做什么</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12">
           <Reveal className="md:col-span-7">
             <h2 className="font-display text-5xl leading-[1.02] md:text-[6.5rem]">
-              <span className="font-light">好的</span><span className="font-bold">提问</span>
-              <span className="font-serif-italic italic font-normal text-[var(--brand)]">，</span>
+              <span className="font-light">营造</span>
+              <span
+                className="inline-block px-2 md:px-3 font-bold"
+                style={{ background: "var(--brand)", color: "var(--paper)" }}
+              >
+                问题驱动
+              </span>
               <br />
-              <span className="font-light">比答案</span>
-              <span className="inline-block px-2 md:px-3 ml-2 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>更重要</span>
+              <span className="font-bold">生态社区</span>
             </h2>
           </Reveal>
           <Reveal delay={0.15} className="space-y-6 self-end text-lg leading-relaxed md:col-span-5 md:text-xl">
@@ -282,21 +459,28 @@ function SectionDetails() {
           />
         </div>
         <div className="px-6 py-20 md:px-14 md:py-28">
-          <Reveal><SectionLabel n="02"><span className="text-white">从哪个问题开始？</span></SectionLabel></Reveal>
+          <Reveal><SectionLabel n="02"><span className="text-white">从什么问题开始？</span></SectionLabel></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-8 font-display text-5xl leading-[1.02] md:text-7xl">
-              <span className="font-bold">卓越的创造力</span>
+              <span className="font-bold">从细节开始</span>
            
               <br />
               <span className="inline-block px-2 md:px-3 my-1 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
-                往往藏于细节
+                Think Different
               </span><br />
               
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-[var(--paper)]/80 md:text-lg">
-              不必从一个宏大的问题开始，很多真正重要的问题，一开始都不是以"大问题"的形式出现的，而是以一种微妙的不舒服、好奇、疑惑、荒诞、困惑出现的。
+              很多真正重要的问题，一开始都不是以"大问题"的形式出现的，而是以一种微妙的不舒服、好奇、疑惑、荒诞、困惑出现的。
+              <span
+                className="mx-1 inline-block font-display font-bold italic px-2 py-0.5 align-baseline"
+                style={{ background: "var(--brand)", color: "var(--paper)" }}
+              >
+                那些疯狂到以为自己能改变世界的人
+              </span>
+              ，往往就是从这些一般人所忽略的细节问题开始的。
             </p>
           </Reveal>
           <ul className="mt-12 space-y-6">
@@ -338,19 +522,42 @@ function SectionWho() {
             <p className="mt-6 text-base leading-relaxed text-[var(--ink)]/75">
               提出问题只是开始。我们想邀请对相似问题感兴趣的伙伴来到创客厅，彼此认识，相互看见——也许你们会因共同关心某个问题而彼此看见，甚至展开协作。也许甚至，我们可以因此构建一个以真实表达和共同信念为根基的信任网络。
             </p>
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="mt-10 relative inline-block font-display text-2xl md:text-3xl leading-snug"
+              className="mt-10 flex flex-wrap items-center gap-3 md:gap-4"
             >
-              <span className="relative z-10 px-3 py-1" style={{ background: "var(--brand)", color: "var(--paper)" }}>
-              也许一段好关系，
+              <span
+                className="relative z-10 inline-block px-3 py-1 font-display text-2xl md:text-3xl leading-snug"
+                style={{ background: "var(--brand)", color: "var(--paper)" }}
+              >
+                也许一段好关系，
                 <br />
                 就从一个好问题开始。
               </span>
-            </motion.p>
+              <motion.a
+                href="https://wj.qq.com/s2/26961892/e42c/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="提交你的问题"
+                initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ scale: 1.1, rotate: -8 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-shadow duration-500 hover:shadow-[0_0_28px_4px_rgba(1,0,251,0.35)] md:h-14 md:w-14"
+                style={{ background: "var(--ink)" }}
+              >
+                <span className="absolute -top-7 whitespace-nowrap rounded-full bg-[var(--paper)] px-2.5 py-1 font-display text-[10px] uppercase tracking-[0.2em] opacity-0 shadow-sm transition-all duration-300 group-hover:-top-9 group-hover:opacity-100" style={{ color: "var(--ink)" }}>
+                  提交问题
+                </span>
+                <span aria-hidden className="absolute inset-1 rounded-full border border-[var(--paper)]/15 transition-colors duration-500 group-hover:border-[var(--brand)]" />
+                <ArrowUpRight className="h-5 w-5 text-[var(--paper)] transition-transform duration-500 group-hover:rotate-45 md:h-6 md:w-6" />
+              </motion.a>
+            </motion.div>
           </Reveal>
           <Reveal className="md:col-span-12 md:row-start-1 order-1">
             <motion.h2 style={{ x: titleX }} className="font-display text-5xl leading-[0.98] md:text-[10rem]">
@@ -467,7 +674,7 @@ function SectionCatalog() {
   return (
     <section ref={ref} id="catalog" className="px-6 py-32 md:px-10 md:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal><SectionLabel n="05">我们一起可以做些什么</SectionLabel></Reveal>
+        <Reveal><SectionLabel n="05">我们可以一起先做些什么</SectionLabel></Reveal>
         <Reveal delay={0.1}>
           <h2 className="mt-10 font-display text-4xl leading-[1.02] md:text-[7rem]">
             <span className="font-light">一起</span><span className="font-bold">筹备</span><br />
@@ -490,7 +697,7 @@ function SectionCatalog() {
               className="aspect-[4/5] w-full object-cover"
             />
             <p className="mt-3 text-xs uppercase tracking-[0.2em] text-[var(--ink)]/55">
-              REF. Whole Earth Catalog, 1968 — Stewart Brand
+              Whole Earth Catalog  — Stay Hungry, Stay Foolish.
             </p>
           </Reveal>
           <Reveal delay={0.15} className="space-y-6 text-base leading-relaxed md:col-span-7 md:text-lg">
@@ -542,7 +749,7 @@ function AnimatedAmenitiesTitle() {
 }
 
 function FooterCTA() {
-  const fullAddress = "杭州市拱墅区妙家浜巷59号 汇金云创·人才科创综合体";
+  const fullAddress = "杭州市拱墅区妙家浜巷59号 汇金云创·人才科创综合体 6B幢5楼";
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -567,7 +774,7 @@ function FooterCTA() {
       <div className="mx-auto max-w-[1600px]">
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--paper)]/60">直达创客厅 · DROP BY</p>
         <h2 className="mt-8 font-display leading-[0.92] text-[clamp(3rem,12vw,15rem)]">
-          <span className="font-light">全世界的</span>
+          <span className="font-light">全世界</span>
           <span className="inline-block px-3 md:px-5 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>创造者</span><br />
           <span className="font-light">联合</span><span className="font-bold">起来</span>
           <span className="font-serif-italic italic font-normal text-[var(--brand)]">.</span>
@@ -579,7 +786,7 @@ function FooterCTA() {
             <div className="mt-3 flex flex-wrap items-start gap-4">
               <p className="font-display text-lg leading-snug">
                 杭州市拱墅区妙家浜巷59号<br />
-                汇金云创·人才科创综合体
+                汇金云创·人才科创综合体 6B幢5楼
               </p>
               <button
                 type="button"
