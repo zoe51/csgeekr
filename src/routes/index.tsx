@@ -219,7 +219,7 @@ function SectionDNIntro() {
   return (
     <section
       id="dn-cn"
-      className="relative flex min-h-screen items-center overflow-hidden px-6 py-24 md:px-10 md:py-32"
+      className="relative overflow-hidden px-6 pt-32 pb-0 md:px-10 md:pt-44 md:pb-0"
     >
       {/* 背景装饰:角落大圆 + 网格 */}
       <motion.div
@@ -249,7 +249,7 @@ function SectionDNIntro() {
 
       <div className="relative mx-auto w-full max-w-[1400px]">
         <Reveal>
-          <SectionLabel n="00">我们是谁</SectionLabel>
+          <SectionLabel n="01">我们是谁</SectionLabel>
         </Reveal>
 
         <div className="mt-12 grid items-center gap-12 md:mt-16 md:grid-cols-12 md:gap-16">
@@ -318,57 +318,116 @@ function SectionDNIntro() {
           </div>
         </div>
 
-        {/* 标签行 */}
-        <Reveal delay={0.35} className="mt-16 md:mt-20">
-          <div className="border-t border-[var(--ink)]/10 pt-8">
-            <div className="mb-5 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--ink)]/50">
-              <span className="font-display font-bold" style={{ color: "var(--brand)" }}>
-                ★
-              </span>
-              <span>DN系社区 / 做世界的水手，奔赴所有港口</span>
-              <span className="h-px flex-1 max-w-24 bg-[var(--ink)]/20" />
-            </div>
-            <div className="flex flex-wrap items-center gap-3 md:gap-4">
-              {tags.map((tag, i) => {
-                const isExternal = !tag.href.includes("csgeekr.com");
-                return (
-                  <motion.a
-                    key={tag.name}
-                    href={tag.href}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noopener noreferrer" : undefined}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4 + i * 0.07 }}
-                    className="group relative inline-block"
-                    aria-label={`访问 ${tag.name} 社区`}
-                  >
-                    {tag.active ? (
-                      <span className="relative inline-flex items-center gap-2.5 overflow-hidden rounded-full px-6 py-3 font-display text-lg font-bold md:text-xl transition-transform duration-300 group-hover:-translate-y-1.5 group-hover:scale-[1.04]" style={{ background: "var(--brand)", color: "var(--paper)" }}>
-                        <motion.span
-                          animate={{ scale: [1, 1.5, 1], opacity: [1, 0.55, 1] }}
-                          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                          className="h-2 w-2 rounded-full bg-[var(--paper)]"
-                        />
-                        {tag.name}
-                        {tag.badge && (
-                          <span className="ml-1 rounded-full border border-[var(--paper)]/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.15em] opacity-90">
-                            {tag.badge}
+        {/* 信条 + 社区标签 / 左右合并展示 */}
+        <Reveal delay={0.35} className="mt-14 md:mt-20">
+          <div className="relative overflow-hidden border-y border-[var(--ink)]/10">
+            {/* 装饰引号 */}
+            <span aria-hidden className="pointer-events-none absolute -left-4 -top-10 select-none font-serif-italic italic text-[8rem] leading-none text-[var(--brand)]/10 md:-left-6 md:-top-16 md:text-[14rem]">
+              “
+            </span>
+            <span aria-hidden className="pointer-events-none absolute -right-4 -bottom-20 select-none font-serif-italic italic text-[8rem] leading-none text-[var(--brand)]/10 md:-right-6 md:-bottom-32 md:text-[14rem]">
+              ”
+            </span>
+
+            <div className="relative grid md:grid-cols-2">
+              {/* 左侧:社区标签 */}
+              <div className="relative px-6 py-8 md:px-10 md:py-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.45 }}
+                  className="mb-5 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-[var(--ink)]/55"
+                >
+                  <span className="font-display font-bold" style={{ color: "var(--brand)" }}>
+                    ★
+                  </span>
+                  <span>DN系社区 / SINCE 2021</span>
+                </motion.div>
+                <div className="flex flex-wrap items-center gap-3 md:gap-4">
+                  {tags.map((tag, i) => {
+                    const isExternal = !tag.href.includes("csgeekr.com");
+                    return (
+                      <motion.a
+                        key={tag.name}
+                        href={tag.href}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.4 + i * 0.07 }}
+                        className="group relative inline-block"
+                        aria-label={`访问 ${tag.name} 社区`}
+                      >
+                        {tag.active ? (
+                          <span className="relative inline-flex items-center gap-2.5 overflow-hidden rounded-full px-5 py-2.5 font-display text-base font-bold transition-transform duration-300 group-hover:-translate-y-1.5 group-hover:scale-[1.04] md:px-6 md:py-3 md:text-lg" style={{ background: "var(--brand)", color: "var(--paper)" }}>
+                            <motion.span
+                              animate={{ scale: [1, 1.5, 1], opacity: [1, 0.55, 1] }}
+                              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                              className="h-2 w-2 rounded-full bg-[var(--paper)]"
+                            />
+                            {tag.name}
+                            {tag.badge && (
+                              <span className="ml-1 rounded-full border border-[var(--paper)]/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.15em] opacity-90">
+                                {tag.badge}
+                              </span>
+                            )}
+                            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-2 rounded-full border border-[var(--ink)]/15 bg-[var(--paper)] px-4 py-2.5 font-display text-base text-[var(--ink)]/70 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--brand)] hover:text-[var(--brand)] md:px-5 md:py-3">
+                            <span className="h-1.5 w-1.5 rounded-full bg-[var(--ink)]/30 transition-colors group-hover:bg-[var(--brand)]" />
+                            {tag.name}
+                            <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" />
                           </span>
                         )}
-                        <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-2 rounded-full border border-[var(--ink)]/15 bg-[var(--paper)] px-5 py-3 font-display text-base text-[var(--ink)]/70 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--brand)] hover:text-[var(--brand)] md:text-lg">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--ink)]/30 transition-colors group-hover:bg-[var(--brand)]" />
-                        {tag.name}
-                        <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" />
-                      </span>
-                    )}
-                  </motion.a>
-                );
-              })}
+                      </motion.a>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 中间竖向分隔线 */}
+              <span aria-hidden className="hidden md:block absolute left-1/2 top-8 bottom-8 w-px -translate-x-1/2 bg-[var(--ink)]/10" />
+
+              {/* 右侧:信条 */}
+              <div className="relative px-6 py-8 md:px-10 md:py-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.55 }}
+                  className="mb-4 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-[var(--ink)]/55 md:mb-5"
+                >
+                  <span className="font-display font-bold" style={{ color: "var(--brand)" }}>
+                    ★
+                  </span>
+                  <span>DNCN 游民精神</span>
+                </motion.div>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="font-serif-italic italic font-normal leading-[1.05] text-2xl md:text-3xl lg:text-4xl"
+                  style={{ color: "var(--brand)" }}
+                >
+                  做世界的水手，
+                  <br />
+                  奔赴所有港口。
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                  className="mt-4 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[var(--ink)]/45 md:mt-5"
+                >
+                  <span className="h-px w-7 bg-[var(--brand)]" />
+                  <span>To be a sailor of the world, bound for all ports.</span>
+                </motion.div>
+              </div>
             </div>
           </div>
         </Reveal>
@@ -407,19 +466,19 @@ function SectionWhat() {
   return (
     <section id="what" className="relative px-6 py-32 md:px-10 md:py-44">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal><SectionLabel n="01">我们在做什么</SectionLabel></Reveal>
+        <Reveal><SectionLabel n="02">我们在DN杭州做什么</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12">
           <Reveal className="md:col-span-7">
             <h2 className="font-display text-5xl leading-[1.02] md:text-[6.5rem]">
-              <span className="font-light">营造</span>
+              <span className="font-light">营造</span> 
               <span
                 className="inline-block px-2 md:px-3 font-bold"
                 style={{ background: "var(--brand)", color: "var(--paper)" }}
               >
-                问题驱动
+                问题驱动型
               </span>
               <br />
-              <span className="font-bold">生态社区</span>
+              <span className="font-bold">创造者社区</span>
             </h2>
           </Reveal>
           <Reveal delay={0.15} className="space-y-6 self-end text-lg leading-relaxed md:col-span-5 md:text-xl">
@@ -459,7 +518,7 @@ function SectionDetails() {
           />
         </div>
         <div className="px-6 py-20 md:px-14 md:py-28">
-          <Reveal><SectionLabel n="02"><span className="text-white">从什么问题开始？</span></SectionLabel></Reveal>
+          <Reveal><SectionLabel n="03"><span className="text-white">从什么问题开始？</span></SectionLabel></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-8 font-display text-5xl leading-[1.02] md:text-7xl">
               <span className="font-bold">从细节开始</span>
@@ -513,7 +572,7 @@ function SectionWho() {
   return (
     <section ref={ref} className="px-6 py-32 md:px-10 md:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal><SectionLabel n="03">我们想邀请你一起</SectionLabel></Reveal>
+        <Reveal><SectionLabel n="04">我们想邀请你一起</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12 md:items-end">
           <Reveal delay={0.15} className="md:col-span-6 md:col-start-7 order-2 md:order-1">
             <p className="text-lg leading-relaxed md:text-xl">
@@ -598,7 +657,7 @@ function SectionAmenities() {
     <section id="space" className="px-6 py-32 md:px-10 md:py-44" style={{ background: "var(--brand)", color: "var(--paper)" }}>
       <div className="mx-auto max-w-[1400px]">
         <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--paper)]/70">
-          <span className="font-display font-bold text-[var(--paper)]">04</span>
+          <span className="font-display font-bold text-[var(--paper)]">05</span>
           <span className="h-px flex-1 max-w-12 bg-[var(--paper)]/40" />
           一个真实存在的根据地
         </div>
@@ -674,7 +733,7 @@ function SectionCatalog() {
   return (
     <section ref={ref} id="catalog" className="px-6 py-32 md:px-10 md:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal><SectionLabel n="05">我们可以一起先做些什么</SectionLabel></Reveal>
+        <Reveal><SectionLabel n="06">我们可以一起先做些什么</SectionLabel></Reveal>
         <Reveal delay={0.1}>
           <h2 className="mt-10 font-display text-4xl leading-[1.02] md:text-[7rem]">
             <span className="font-light">一起</span><span className="font-bold">筹备</span><br />
