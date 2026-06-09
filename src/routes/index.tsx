@@ -20,7 +20,7 @@ const CREATIVE_LOUNGE_LOCATION = {
 const LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/cslogo.png";
 
 // DN-CN 数字游民中国 logo
-const DN_CN_LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/dncn.png";
+const DN_CN_LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/hjyc.png";
 
 // DN杭州 logo(大标题用)
 const DN_HZ_LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/DNHZ.png";
