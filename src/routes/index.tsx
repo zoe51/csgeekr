@@ -1,11 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { ArrowUpRight, Check, Copy, MapPin } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import questionsImg from "@/assets/questions.jpg";
 import spaceImg from "@/assets/space.jpg";
 import catalogImg from "@/assets/catalog.jpg";
+import { Nav } from "@/components/Nav";
 
 // 高德地图坐标 (GCJ-02) — 创客厅 · 汇金云创·人才科创综合体
 // 来源:https://surl.amap.com/1CfCqvUr15I
@@ -19,7 +20,7 @@ const CREATIVE_LOUNGE_LOCATION = {
 const LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/cslogo.png";
 
 // DN-CN 数字游民中国 logo
-const DN_CN_LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/dncn.png";
+const DN_CN_LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/hjyc.png";
 
 // 唤起高德地图导航:PC 跳转网页端、移动端唤起 App
 function openAmapUniversal({ lat, lng, name }: { lat: number; lng: number; name: string }) {
@@ -71,56 +72,6 @@ function ScrollProgress() {
       style={{ scaleX, transformOrigin: "0% 50%", background: "var(--brand)" }}
       className="fixed left-0 right-0 top-0 z-[60] h-[3px]"
     />
-  );
-}
-
-function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "translate-y-0 opacity-100 bg-[var(--paper)]/85 backdrop-blur-md border-b border-[var(--ink)]/10 shadow-[0_1px_0_rgba(0,0,0,0.04)]"
-          : "bg-transparent -translate-y-full opacity-0 md:translate-y-0 md:opacity-100"
-      }`}
-    >
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
-        <a href="/" className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
-          <img
-            src={LOGO_URL}
-            alt="创客厅 logo"
-            className="h-7 w-7 rounded-full object-cover"
-          />
-          DN杭州 · 杭创营
-        </a>
-        <nav className="hidden gap-8 text-sm md:flex">
-          <a href="#what" className="hover:text-[var(--brand)] transition">关于</a>
-          <a href="#space" className="hover:text-[var(--brand)] transition">空间</a>
-          <a href="#catalog" className="hover:text-[var(--brand)] transition">新全球概览</a>
-          <a href="#visit" className="hover:text-[var(--brand)] transition">到访</a>
-        </nav>
-        <a
-          href={`https://uri.amap.com/navigation?to=${CREATIVE_LOUNGE_LOCATION.lng},${CREATIVE_LOUNGE_LOCATION.lat},${encodeURIComponent(CREATIVE_LOUNGE_LOCATION.name)}&mode=car&policy=1&src=csgeekr&coordinate=gaode&callnative=1`}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => {
-            e.preventDefault();
-            openAmapUniversal(CREATIVE_LOUNGE_LOCATION);
-          }}
-          aria-label="使用高德地图导航至创客厅"
-          className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-[var(--paper)] transition hover:opacity-90"
-          style={{ background: "var(--brand)" }}
-        >
-          导航至创客厅 <span aria-hidden>→</span>
-        </a>
-      </div>
-    </header>
   );
 }
 
@@ -276,7 +227,7 @@ function SectionDNIntro() {
               {/* 顶部小标签 */}
               <div className="absolute left-6 top-6 flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[var(--paper)]/60">
                 <span className="h-px w-6 bg-[var(--brand)]" />
-                SINCE 2021
+                拱墅区汇金云创人才综合体
               </div>
             </motion.div>
           </Reveal>
@@ -285,34 +236,25 @@ function SectionDNIntro() {
           <div className="space-y-10 md:col-span-7">
             <Reveal delay={0.15}>
               <div className="space-y-3">
-                <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: 0.1 }}
-                  className="inline-flex items-center gap-2 font-serif-italic italic text-2xl text-[var(--brand)] md:text-3xl"
-                >
-                  <span aria-hidden className="h-px w-7 bg-[var(--brand)]" />
-                  我们是谁
-                </motion.span>
+                
                 <h2 className="font-display leading-[0.92] text-5xl md:text-[6.5rem]">
-                  <span className="font-bold text-[var(--ink)]">DNCN </span>
+                  <span className="font-bold text-[var(--ink)]">创·DN杭州 </span>
                   <br />
                   <span
                     className="inline-block px-2 md:px-3 font-bold"
                     style={{ background: "var(--brand)", color: "var(--paper)" }}
                   >
-                    数字游民
+                    杭创营
                   </span>
                   <br />
-                  <span className="font-light">中国</span>
+                  <span className="font-light">开发者社区</span>
                   <span className="font-serif-italic italic font-normal text-[var(--brand)]">.</span>
                 </h2>
               </div>
             </Reveal>
             <Reveal delay={0.25}>
               <p className="max-w-2xl text-base leading-relaxed text-[var(--ink)]/75 md:text-lg">
-                我们是中国数字游民社区的先行者。2021 年在浙江安吉落地了国内首个数字游民共居空间，目前已在全国建立四大线下青年共居社区，并即将在杭州落成第五家开发者主题社区。DN-CN 汇聚了大量自由职业者与独立创业者，逐步构建起中国最具活力的数字游民生态圈。
+                DN杭州·杭创营OPC社区位于杭州拱墅区汇金云创·人才科创综合体，由杭州人才集团下属国宇物产创办，是一个以人工智能和互联网为主题的专业创新生态社区。社区以“建设开发者生态”为使命，通过构建硬件空间、信息环境与聚集开发者等要素，并辅以催化措施，旨在人为创造一个熟人社会生态，使创新自发涌现。
               </p>
             </Reveal>
           </div>
@@ -403,7 +345,7 @@ function SectionDNIntro() {
                   <span className="font-display font-bold" style={{ color: "var(--brand)" }}>
                     ★
                   </span>
-                  <span>DNCN 游民精神</span>
+                  <span>社区精神</span>
                 </motion.div>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
@@ -413,9 +355,9 @@ function SectionDNIntro() {
                   className="font-serif-italic italic font-normal leading-[1.05] text-2xl md:text-3xl lg:text-4xl"
                   style={{ color: "var(--brand)" }}
                 >
-                  做世界的水手，
+                  那些疯狂到以为自己能改变世界的人，
                   <br />
-                  奔赴所有港口。
+                  往往真的做到了。
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -425,7 +367,7 @@ function SectionDNIntro() {
                   className="mt-4 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[var(--ink)]/45 md:mt-5"
                 >
                   <span className="h-px w-7 bg-[var(--brand)]" />
-                  <span>To be a sailor of the world, bound for all ports.</span>
+                  <span>The people who are crazy enough to think they can change the world are the ones who do.” — Steve Jobs.</span>
                 </motion.div>
               </div>
             </div>
@@ -466,7 +408,7 @@ function SectionWhat() {
   return (
     <section id="what" className="relative px-6 py-32 md:px-10 md:py-44">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal><SectionLabel n="02">我们在DN杭州做什么</SectionLabel></Reveal>
+        <Reveal><SectionLabel n="02">我们在杭州做什么</SectionLabel></Reveal>
         <div className="mt-10 grid gap-16 md:grid-cols-12">
           <Reveal className="md:col-span-7">
             <h2 className="font-display text-5xl leading-[1.02] md:text-[6.5rem]">
@@ -478,7 +420,7 @@ function SectionWhat() {
                 问题驱动型
               </span>
               <br />
-              <span className="font-bold">创造者社区</span>
+              <span className="font-bold">创新创业生态</span>
             </h2>
           </Reveal>
           <Reveal delay={0.15} className="space-y-6 self-end text-lg leading-relaxed md:col-span-5 md:text-xl">
@@ -586,7 +528,7 @@ function SectionWho() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="mt-10 flex flex-wrap items-center gap-3 md:gap-4"
+              className="mt-10"
             >
               <span
                 className="relative z-10 inline-block px-3 py-1 font-display text-2xl md:text-3xl leading-snug"
@@ -596,26 +538,6 @@ function SectionWho() {
                 <br />
                 就从一个好问题开始。
               </span>
-              <motion.a
-                href="https://wj.qq.com/s2/26961892/e42c/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="提交你的问题"
-                initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
-                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ scale: 1.1, rotate: -8 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-shadow duration-500 hover:shadow-[0_0_28px_4px_rgba(1,0,251,0.35)] md:h-14 md:w-14"
-                style={{ background: "var(--ink)" }}
-              >
-                <span className="absolute -top-7 whitespace-nowrap rounded-full bg-[var(--paper)] px-2.5 py-1 font-display text-[10px] uppercase tracking-[0.2em] opacity-0 shadow-sm transition-all duration-300 group-hover:-top-9 group-hover:opacity-100" style={{ color: "var(--ink)" }}>
-                  提交问题
-                </span>
-                <span aria-hidden className="absolute inset-1 rounded-full border border-[var(--paper)]/15 transition-colors duration-500 group-hover:border-[var(--brand)]" />
-                <ArrowUpRight className="h-5 w-5 text-[var(--paper)] transition-transform duration-500 group-hover:rotate-45 md:h-6 md:w-6" />
-              </motion.a>
             </motion.div>
           </Reveal>
           <Reveal className="md:col-span-12 md:row-start-1 order-1">
@@ -646,9 +568,9 @@ function SectionAmenities() {
     "免费注册公司 + 创业政策对接 + 算力补贴支持",
   ];
   const future = [
-    "4000平超大创意办公空间",
+    "8876.27平超大建筑面积，满足创意办公和住宿需求",
     "Maker Lab元宇宙设备（VR / 触感手套 / 空间音频  / 全向跑步机等）",
-    "可容纳200+伙伴的住宿区",
+    "可容纳200+伙伴的生活住宿区",
     "项目路演舞台",
     "多媒体娱乐室和餐饮区",
     "初创项目1v1免费咨询和投融资对接支持",
@@ -772,6 +694,25 @@ function SectionCatalog() {
             <br />
             也许在这里，你会遇见和你志趣相投的创业同行者。
             </blockquote>
+            <Reveal delay={0.2} className="pt-2">
+              <Link
+                to="/submit"
+                aria-label="提交你的问题"
+                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-6 py-3.5 font-display text-base font-medium text-[var(--paper)] transition-shadow duration-500 hover:shadow-[0_0_28px_4px_rgba(1,0,251,0.35)] md:px-8 md:text-lg"
+                style={{ background: "var(--brand)" }}
+              >
+                <span
+                  aria-hidden
+                  className="absolute inset-0 -z-0 translate-y-full bg-[var(--ink)] transition-transform duration-500 group-hover:translate-y-0"
+                />
+                <span className="relative z-10">从提问开始</span>
+                <span
+                  className="relative z-10 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--paper)]/20 transition-all duration-500 group-hover:rotate-45 group-hover:bg-[var(--paper)]/30 md:h-8 md:w-8"
+                >
+                  <ArrowUpRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                </span>
+              </Link>
+            </Reveal>
           </Reveal>
         </div>
       </div>
