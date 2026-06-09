@@ -46,7 +46,7 @@ function SubmitPage() {
       return;
     }
     if (!isPublic && !contact.trim()) {
-      setError("不公开的问题请留下联系方式，我们才能把回复送到你手里。");
+      setError("不公开的问题请留下联系邮箱，我们将私密回复你。");
       return;
     }
     setError(null);
