@@ -705,7 +705,7 @@ function SectionCatalog() {
                   aria-hidden
                   className="absolute inset-0 -z-0 translate-y-full bg-[var(--ink)] transition-transform duration-500 group-hover:translate-y-0"
                 />
-                <span className="relative z-10">从提问开始</span>
+                <span className="relative z-10">分享我的问题</span>
                 <span
                   className="relative z-10 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--paper)]/20 transition-all duration-500 group-hover:rotate-45 group-hover:bg-[var(--paper)]/30 md:h-8 md:w-8"
                 >

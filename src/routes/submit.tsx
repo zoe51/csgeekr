@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { useState, type FormEvent, type ReactNode } from "react";
-import { ArrowUpRight, Check, Send } from "lucide-react";
+import { useState, type ReactNode } from "react";
+import { ArrowUpRight, Check, Eye, EyeOff, Send } from "lucide-react";
 import { Nav, NAV_LOGO_URL } from "@/components/Nav";
 
 export const Route = createFileRoute("/submit")({
@@ -29,26 +29,68 @@ type FormState = "idle" | "submitting" | "success";
 function SubmitPage() {
   const [question, setQuestion] = useState("");
   const [contact, setContact] = useState("");
+  const [isPublic, setIsPublic] = useState(true);
   const [state, setState] = useState<FormState>("idle");
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  // 数据提交接口
+  // 开发期走 Vite 代理（/coze → http://14.103.87.224:7781），生产环境由反向代理（nginx）转发
+  const SUBMIT_ENDPOINT = "/coze/workflow/run";
+  const WORKFLOW_ID = "7649245333243723817";
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (state === "submitting") return;
     if (!question.trim()) {
       setError("问题不能为空，先写下你心里那个最想问的事。");
       return;
     }
+    if (!isPublic && !contact.trim()) {
+      setError("不公开的问题请留下联系方式，我们才能把回复送到你手里。");
+      return;
+    }
     setError(null);
     setState("submitting");
-    // 模拟提交:真实场景可对接后端 / 问卷服务
-    await new Promise((r) => setTimeout(r, 900));
-    setState("success");
+    try {
+      const response = await fetch(SUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          workflow_id: WORKFLOW_ID,
+          parameters: {
+            contact: contact.trim(),
+            question: question.trim(),
+          },
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`服务返回 ${response.status}`);
+      }
+      // 尝试解析 JSON 响应（即使解析失败也视为成功，因为接口已 2xx）
+      try {
+        await response.json();
+      } catch {
+        /* 忽略非 JSON 响应 */
+      }
+      setState("success");
+    } catch (err) {
+      let message = "提交失败，请稍后再试。";
+      if (err instanceof TypeError) {
+        // 浏览器抛 TypeError 多为 CORS / 网络层失败
+        message =
+          "提交失败：无法连接到创客厅服务（可能是网络问题或服务暂时不可用）。请稍后再试，或直接联系创客厅。";
+      } else if (err instanceof Error) {
+        message = `提交失败：${err.message}。请稍后再试。`;
+      }
+      setError(message);
+      setState("idle");
+    }
   };
 
   const handleReset = () => {
     setQuestion("");
     setContact("");
+    setIsPublic(true);
     setState("idle");
     setError(null);
   };
@@ -73,19 +115,14 @@ function SubmitPage() {
 
           <Reveal delay={0.1}>
             <h1 className="mt-10 font-display leading-[0.95] text-5xl md:text-[7rem]">
-              <span className="font-light">把</span>
+              <span className="font-light">让问题</span>
               <span
                 className="inline-block px-2 md:px-3 font-bold"
                 style={{ background: "var(--brand)", color: "var(--paper)" }}
               >
-                心里
+                被看见
               </span>
-              <span className="font-light">那个</span>
-              <br />
-              <span className="font-serif-italic italic font-normal text-[var(--brand)]">放不下的问题，</span>
-              <br />
-              <span className="font-light">发给</span>
-              <span className="font-bold">创客厅</span>
+              
               <span className="font-serif-italic italic font-normal text-[var(--brand)]">.</span>
             </h1>
           </Reveal>
@@ -138,8 +175,40 @@ function SubmitPage() {
                       </div>
                     </Field>
 
+                    <div
+                      role="radiogroup"
+                      aria-label="是否公开"
+                      className="relative inline-flex w-full overflow-hidden rounded-full border border-[var(--ink)]/15 bg-[var(--paper)] p-1 md:w-auto"
+                    >
+                      <motion.div
+                        aria-hidden
+                        layout
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        className="absolute top-1 bottom-1 rounded-full"
+                        style={{
+                          background: "var(--brand)",
+                          left: isPublic ? 4 : "calc(50% + 0px)",
+                          width: "calc(50% - 4px)",
+                        }}
+                      />
+                      <PublicToggle
+                        selected={isPublic}
+                        onClick={() => setIsPublic(true)}
+                        icon={<Eye className="h-3.5 w-3.5" />}
+                        label="公开"
+                        sub="进入公共问题池"
+                      />
+                      <PublicToggle
+                        selected={!isPublic}
+                        onClick={() => setIsPublic(false)}
+                        icon={<EyeOff className="h-3.5 w-3.5" />}
+                        label="不公开"
+                        sub="仅本人收到回复"
+                      />
+                    </div>
+
                     <Field
-                      label="提问者联系方式"
+                      label="请选择回复方式"
                       hint="可选。留 e-mail 可获得私密回复；留微信号欢迎社群线上或者线下互动交流。"
                     >
                       <input
@@ -269,6 +338,51 @@ function Field({
       {children}
       {hint && <p className="mt-2 text-sm text-[var(--ink)]/55">{hint}</p>}
     </div>
+  );
+}
+
+function PublicToggle({
+  selected,
+  onClick,
+  icon,
+  label,
+  sub,
+}: {
+  selected: boolean;
+  onClick: () => void;
+  icon: ReactNode;
+  label: string;
+  sub: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="radio"
+      aria-checked={selected}
+      onClick={onClick}
+      className={`relative z-10 inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2.5 font-display text-sm transition-colors duration-300 md:flex-none md:px-5 md:text-base ${
+        selected
+          ? "text-[var(--paper)]"
+          : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
+      }`}
+    >
+      <span
+        aria-hidden
+        className={`transition-transform duration-300 ${selected ? "scale-100" : "scale-90"}`}
+      >
+        {icon}
+      </span>
+      <span className="flex flex-col items-start leading-tight">
+        <span className="font-bold tracking-tight">{label}</span>
+        <span
+          className={`text-[10px] uppercase tracking-[0.15em] transition-colors duration-300 md:text-[11px] ${
+            selected ? "text-[var(--paper)]/80" : "text-[var(--ink)]/45"
+          }`}
+        >
+          {sub}
+        </span>
+      </span>
+    </button>
   );
 }
 

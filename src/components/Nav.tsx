@@ -19,6 +19,8 @@ function openAmapUniversal({ lat, lng, name }: { lat: number; lng: number; name:
   window.open(url, "_blank");
 }
 
+export { openAmapUniversal };
+
 const NAV_ITEMS = [
   { label: "关于", to: "/" as const },
   { label: "提问", to: "/submit" as const },

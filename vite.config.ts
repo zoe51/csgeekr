@@ -12,4 +12,15 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    server: {
+      // 开发期代理 /coze → 14.103.87.224:7781，规避浏览器 CORS 拦截
+      proxy: {
+        "/coze": {
+          target: "http://14.103.87.224:7781",
+          changeOrigin: true,
+        },
+      },
+    },
+  },
 });

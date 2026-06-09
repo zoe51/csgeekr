@@ -7,30 +7,213 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { ArrowUpRight, MapPin, RotateCw } from "lucide-react";
 import { useEffect, type ReactNode } from "react";
+import { motion } from "framer-motion";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { NAV_LOGO_URL, NAV_LOCATION, openAmapUniversal } from "../components/Nav";
+
+function ErrorShell({
+  badge,
+  title,
+  description,
+  actions,
+}: {
+  badge: string;
+  title: ReactNode;
+  description: ReactNode;
+  actions: ReactNode;
+}) {
+  return (
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-6 py-20">
+      {/* 背景装饰 */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 0.08, scale: 1 }}
+        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+        aria-hidden
+        className="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full blur-3xl"
+        style={{ background: "var(--brand)" }}
+      />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
+        transition={{ duration: 1.2 }}
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-0"
+        style={{
+          backgroundImage: "radial-gradient(var(--ink) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          opacity: 0.05,
+        }}
+      />
+
+      <div className="relative mx-auto max-w-2xl text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--ink)]/15 bg-[var(--paper)] px-4 py-1.5 font-display text-[11px] uppercase tracking-[0.3em] text-[var(--ink)]/65"
+        >
+          <span className="font-display font-bold" style={{ color: "var(--brand)" }}>
+            ★
+          </span>
+          {badge}
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="font-display text-5xl leading-[0.95] md:text-8xl"
+        >
+          {title}
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.25 }}
+          className="mx-auto mt-8 max-w-md text-base leading-relaxed text-[var(--ink)]/70 md:text-lg"
+        >
+          {description}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-3"
+        >
+          {actions}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.6 }}
+          className="mt-16 flex items-center justify-center gap-2 text-xs text-[var(--ink)]/50"
+        >
+          <img
+            src={NAV_LOGO_URL}
+            alt="创客厅 logo"
+            className="h-5 w-5 rounded-full object-cover"
+          />
+          DN杭州 · 杭创营 · 创客厅
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+function CtaButton({
+  to,
+  href,
+  onClick,
+  children,
+  variant = "primary",
+  external = false,
+  ariaLabel,
+}: {
+  to?: string;
+  href?: string;
+  onClick?: () => void;
+  children: ReactNode;
+  variant?: "primary" | "secondary";
+  external?: boolean;
+  ariaLabel?: string;
+}) {
+  const base =
+    "group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-6 py-3 font-display text-sm font-medium transition-shadow duration-500 hover:shadow-[0_0_28px_4px_rgba(1,0,251,0.25)] md:text-base";
+  const primary = "text-[var(--paper)]";
+  const secondary =
+    "border border-[var(--ink)]/15 text-[var(--ink)] hover:border-[var(--brand)] hover:text-[var(--brand)]";
+  const inner = (
+    <>
+      <span
+        aria-hidden
+        className={`absolute inset-0 -z-0 translate-y-full transition-transform duration-500 group-hover:translate-y-0 ${
+          variant === "primary" ? "bg-[var(--ink)]" : "bg-[var(--brand)]"
+        }`}
+      />
+      <span className="relative z-10">{children}</span>
+    </>
+  );
+  const className = `${base} ${variant === "primary" ? primary : secondary}`;
+
+  if (to) {
+    return (
+      <Link to={to} className={className} aria-label={ariaLabel}>
+        {inner}
+      </Link>
+    );
+  }
+  return (
+    <a
+      href={href}
+      onClick={onClick}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      className={className}
+      aria-label={ariaLabel}
+    >
+      {inner}
+    </a>
+  );
+}
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+    <ErrorShell
+      badge="404 · 页面走丢了"
+      title={
+        <>
+          <span className="font-light">这里没有</span>
+          <span
+            className="inline-block px-2 md:px-3 font-bold"
+            style={{ background: "var(--brand)", color: "var(--paper)" }}
           >
-            Go home
-          </Link>
-        </div>
-      </div>
-    </div>
+            你找的页面
+          </span>
+          <span className="font-serif-italic italic font-normal text-[var(--brand)]">.</span>
+        </>
+      }
+      description="可能链接已失效，或者地址输入有误。不如换个方向——回到创客厅看看，或者直接给我们留一个好问题。"
+      actions={
+        <>
+          <CtaButton to="/" variant="primary" ariaLabel="回到创客厅首页">
+            回到首页
+            <span
+              aria-hidden
+              className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--paper)]/20 transition-all duration-500 group-hover:rotate-45 group-hover:bg-[var(--paper)]/30 md:h-8 md:w-8"
+            >
+              <ArrowUpRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
+            </span>
+          </CtaButton>
+          <CtaButton to="/submit" variant="secondary" ariaLabel="提交你的问题">
+            提交问题
+          </CtaButton>
+          <a
+            href={`https://uri.amap.com/navigation?to=${NAV_LOCATION.lng},${NAV_LOCATION.lat},${encodeURIComponent(NAV_LOCATION.name)}&mode=car&policy=1&src=csgeekr&coordinate=gaode&callnative=1`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              openAmapUniversal(NAV_LOCATION);
+            }}
+            className="inline-flex items-center gap-2 text-sm text-[var(--ink)]/60 transition-colors hover:text-[var(--brand)]"
+            aria-label="使用高德地图导航至创客厅"
+          >
+            <MapPin className="h-3.5 w-3.5" />
+            导航到线下
+          </a>
+        </>
+      }
+    />
   );
 }
 
@@ -42,33 +225,45 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+    <ErrorShell
+      badge="出了点小状况"
+      title={
+        <>
+          <span className="font-light">页面</span>
+          <span
+            className="inline-block px-2 md:px-3 font-bold"
+            style={{ background: "var(--brand)", color: "var(--paper)" }}
+          >
+            没加载出来
+          </span>
+          <span className="font-serif-italic italic font-normal text-[var(--brand)]">.</span>
+        </>
+      }
+      description="可能是网络波动，也可能是我们的服务打了个盹。你可以刷新再试，或者直接回到首页继续探索。"
+      actions={
+        <>
           <button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-6 py-3 font-display text-sm font-medium text-[var(--paper)] transition-shadow duration-500 hover:shadow-[0_0_28px_4px_rgba(1,0,251,0.25)] md:text-base"
+            style={{ background: "var(--brand)" }}
+            aria-label="重试加载"
           >
-            Try again
+            <span
+              aria-hidden
+              className="absolute inset-0 -z-0 translate-y-full bg-[var(--ink)] transition-transform duration-500 group-hover:translate-y-0"
+            />
+            <RotateCw className="relative z-10 h-4 w-4 transition-transform duration-500 group-hover:rotate-180" />
+            <span className="relative z-10">再试一次</span>
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
-        </div>
-      </div>
-    </div>
+          <CtaButton to="/" variant="secondary" ariaLabel="回到创客厅首页">
+            回到首页
+          </CtaButton>
+        </>
+      }
+    />
   );
 }
 
