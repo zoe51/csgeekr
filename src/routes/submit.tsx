@@ -60,6 +60,7 @@ function SubmitPage() {
           parameters: {
             contact: contact.trim(),
             question: question.trim(),
+            type: isPublic ? "公开" : "不公开",
           },
         }),
       });
