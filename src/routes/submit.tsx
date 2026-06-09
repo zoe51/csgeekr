@@ -158,7 +158,7 @@ function SubmitPage() {
                   <div className="space-y-8">
                     <Field
                       label="问题"
-                      hint="尽量具体。把你最近真正在想的那个问题，写出来。"
+                      
                       required
                     >
                       <textarea
@@ -167,11 +167,11 @@ function SubmitPage() {
                         required
                         rows={6}
                         maxLength={500}
-                        placeholder="例如：AI 提效工具越来越多，为什么人反而更焦虑？"
+                        placeholder="描述尽量具体，尤其是你反复在思考的问题。"
                         className="w-full resize-none border-0 border-b-2 border-[var(--ink)]/15 bg-transparent px-1 py-3 font-display text-xl leading-relaxed text-[var(--ink)] placeholder:text-[var(--ink)]/30 focus:border-[var(--brand)] focus:outline-none md:text-2xl"
                       />
                       <div className="mt-2 flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-[var(--ink)]/40">
-                        <span>必填</span>
+                        <span>字数</span>
                         <span>{question.length} / 500</span>
                       </div>
                     </Field>
@@ -210,7 +210,7 @@ function SubmitPage() {
 
                     <Field
                       label="请选择回复方式"
-                      hint="可选。留 e-mail 可获得私密回复；留微信号欢迎社群线上或者线下互动交流。"
+                      hint="可选填。留 e-mail 可获得私密回复；留微信号欢迎社群线上或者线下互动交流。"
                     >
                       <input
                         value={contact}

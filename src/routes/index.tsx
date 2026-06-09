@@ -20,7 +20,10 @@ const CREATIVE_LOUNGE_LOCATION = {
 const LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/cslogo.png";
 
 // DN-CN 数字游民中国 logo
-const DN_CN_LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/hjyc.png";
+const DN_CN_LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/dncn.png";
+
+// DN杭州 logo(大标题用)
+const DN_HZ_LOGO_URL = "https://51-1327029614.cos.ap-shanghai.myqcloud.com/pitch/DNHZ.png";
 
 // 唤起高德地图导航:PC 跳转网页端、移动端唤起 App
 function openAmapUniversal({ lat, lng, name }: { lat: number; lng: number; name: string }) {
@@ -238,7 +241,11 @@ function SectionDNIntro() {
               <div className="space-y-3">
                 
                 <h2 className="font-display leading-[0.92] text-5xl md:text-[6.5rem]">
-                  <span className="font-bold text-[var(--ink)]">DN杭州 </span>
+                  <img
+                    src={DN_HZ_LOGO_URL}
+                    alt="DN杭州"
+                    className="inline-block h-10 align-middle md:h-24"
+                  />
                   <br />
                   <span
                     className="inline-block px-2 md:px-3 font-bold"
@@ -345,7 +352,7 @@ function SectionDNIntro() {
                   <span className="font-display font-bold" style={{ color: "var(--brand)" }}>
                     ★
                   </span>
-                  <span>社区精神</span>
+                  <span>创·DN杭州·杭创营</span>
                 </motion.div>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
@@ -439,8 +446,8 @@ function SectionWhat() {
 function SectionDetails() {
   const questions = [
     "有这么多AI提效工具，为什么人反而更焦虑？",
-    "逃离大城市内卷后应该如何生活？",
-    "为什么100w的充电头可以做的如此之小？",
+    "裸辞逃离大城市内卷后应该如何生活？",
+    "100w的充电头还可以做的更小吗？",
   ];
   return (
     <section className="relative overflow-hidden text-[var(--paper)]" style={{ background: "var(--ink)" }}>
