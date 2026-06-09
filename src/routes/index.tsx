@@ -238,7 +238,7 @@ function SectionDNIntro() {
               <div className="space-y-3">
                 
                 <h2 className="font-display leading-[0.92] text-5xl md:text-[6.5rem]">
-                  <span className="font-bold text-[var(--ink)]">创·DN杭州 </span>
+                  <span className="font-bold text-[var(--ink)]">DN杭州 </span>
                   <br />
                   <span
                     className="inline-block px-2 md:px-3 font-bold"
@@ -247,7 +247,7 @@ function SectionDNIntro() {
                     杭创营
                   </span>
                   <br />
-                  <span className="font-light">开发者社区</span>
+                  <span className="font-light">OPC社区</span>
                   <span className="font-serif-italic italic font-normal text-[var(--brand)]">.</span>
                 </h2>
               </div>
@@ -659,7 +659,7 @@ function SectionCatalog() {
         <Reveal delay={0.1}>
           <h2 className="mt-10 font-display text-4xl leading-[1.02] md:text-[7rem]">
             <span className="font-light">一起</span><span className="font-bold">筹备</span><br />
-            <span className="font-light">新时代的</span><br />
+            <span className="font-light">问题驱动型</span><br />
             <span className="inline-block whitespace-nowrap px-3 font-bold" style={{ background: "var(--brand)", color: "var(--paper)" }}>
               「新全球概览」
             </span>
